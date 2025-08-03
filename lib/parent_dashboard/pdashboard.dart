@@ -4,6 +4,7 @@ import 'package:vaccine_scheduler/parent_dashboard/child_profile/child_profile.d
 import 'package:vaccine_scheduler/login_page/login.dart';
 import 'package:vaccine_scheduler/parent_dashboard/vaccine_timeline/timeline.dart';
 import 'package:vaccine_scheduler/parent_dashboard/home_landing/home_landing.dart';
+import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
 
 class ParentDashboard extends StatefulWidget {
   final String email;
@@ -18,16 +19,35 @@ class _ParentDashboardState extends State<ParentDashboard> {
 
   final List<Widget> _pages = [];
 
-  @override
-  void initState() {
-    super.initState();
-    _pages.addAll([
-      ParentHomeLanding(email: widget.email), // index 0
-      AppointmentScreen(email: widget.email),
-      ChildProfilePage(),
-      VaccineTimeline(),
-    ]);
-  }
+@override
+void initState() {
+  super.initState();
+  _pages.addAll([
+    ParentHomeLanding(email: widget.email), // index 0
+
+    BackToHomeWrapper(
+      onBack: () {
+        setState(() => _selectedIndex = 0);
+      },
+      child: AppointmentScreen(email: widget.email),
+    ),
+
+    BackToHomeWrapper(
+      onBack: () {
+        setState(() => _selectedIndex = 0);
+      },
+      child: ChildProfilePage(),
+    ),
+
+    BackToHomeWrapper(
+      onBack: () {
+        setState(() => _selectedIndex = 0);
+      },
+      child: VaccineTimeline(),
+    ),
+  ]);
+}
+
 
   @override
   Widget build(BuildContext context) {

@@ -73,7 +73,6 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
 
     return Scaffold(
       backgroundColor: Colors.lightBlue[50],
-      appBar: AppBar(title: const Text("Child Profile")),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Row(

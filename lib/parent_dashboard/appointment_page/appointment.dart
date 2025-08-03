@@ -63,7 +63,6 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
     final role = fakeUserDB[widget.email]?['role'] ?? 'Unknown';
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Appointment")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: role == 'Parent'
