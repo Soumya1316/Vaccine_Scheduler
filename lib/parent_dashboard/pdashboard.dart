@@ -3,6 +3,7 @@ import 'appointment_page/appointment.dart';
 import 'package:vaccine_scheduler/parent_dashboard/child_profile/child_profile.dart';
 import 'package:vaccine_scheduler/login_page/login.dart';
 import 'package:vaccine_scheduler/parent_dashboard/vaccine_timeline/timeline.dart';
+import 'package:vaccine_scheduler/parent_dashboard/home_landing/home_landing.dart';
 
 class ParentDashboard extends StatefulWidget {
   final String email;
@@ -21,6 +22,7 @@ class _ParentDashboardState extends State<ParentDashboard> {
   void initState() {
     super.initState();
     _pages.addAll([
+      ParentHomeLanding(email: widget.email), // index 0
       AppointmentScreen(email: widget.email),
       ChildProfilePage(),
       VaccineTimeline(),
@@ -43,10 +45,18 @@ class _ParentDashboardState extends State<ParentDashboard> {
               ),
             ),
             ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                setState(() => _selectedIndex = 0);
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
               leading: const Icon(Icons.calendar_month),
               title: const Text('Appointments'),
               onTap: () {
-                setState(() => _selectedIndex = 0);
+                setState(() => _selectedIndex = 1);
                 Navigator.pop(context);
               },
             ),
@@ -54,7 +64,7 @@ class _ParentDashboardState extends State<ParentDashboard> {
               leading: const Icon(Icons.child_care),
               title: const Text('Child Profile'),
               onTap: () {
-                setState(() => _selectedIndex = 1);
+                setState(() => _selectedIndex = 2);
                 Navigator.pop(context);
               },
             ),
@@ -62,7 +72,7 @@ class _ParentDashboardState extends State<ParentDashboard> {
               leading: const Icon(Icons.timeline),
               title: const Text('Vaccine Timeline'),
               onTap: () {
-                setState(() => _selectedIndex = 2);
+                setState(() => _selectedIndex = 3);
                 Navigator.pop(context);
               },
             ),

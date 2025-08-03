@@ -30,9 +30,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
       setState(() {
         message = "Account created! You can now login.";
       });
-      Future.delayed(const Duration(seconds: 1), () {
-        Navigator.pop(context);
-      });
     }
   }
 
@@ -68,10 +65,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(height: 10),
             ElevatedButton(onPressed: signUp, child: const Text("Create Account")),
             const SizedBox(height: 10),
-            Text(message, style: const TextStyle(color: Colors.green)),
+            Text(message, style: TextStyle(color: message.contains("already") ? Colors.red : Colors.green)),
+            if (message.contains("Account created"))
+              TextButton(
+                onPressed: () {
+                Navigator.pushNamed(context, '/login');
+                },
+                child: const Text("Now Login"),
+                ),
           ],
         ),
       ),
     );
   }
 }
+
