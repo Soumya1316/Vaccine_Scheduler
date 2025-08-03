@@ -97,7 +97,7 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                       ),
                       const SizedBox(width: 10),
                       if (selectedDate != null)
-                        Text("${selectedDate!.toLocal()}".split(' ')[0]),
+                        Text("${selectedDate!.day.toString().padLeft(2, '0')}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.year}"),
                     ],
                   ),
 
@@ -155,7 +155,7 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                             child: TextField(
                               controller: vaccinationControllers[index]['date'],
                               decoration: const InputDecoration(
-                                labelText: 'Date (YYYY-MM-DD)',
+                                labelText: 'Date (DD-MM-YYYY)',
                               ),
                             ),
                           ),
@@ -182,8 +182,9 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                     onPressed: () {
                       String name = nameController.text;
                       String dob = selectedDate != null
-                          ? "${selectedDate!.year.toString().padLeft(4, '0')}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.day.toString().padLeft(2, '0')}"
+                          ? "${selectedDate!.day.toString().padLeft(2, '0')}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.year}"
                           : "Not selected";
+
 
                       String selectedGender = gender ?? "Not selected";
 
