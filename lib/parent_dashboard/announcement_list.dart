@@ -5,7 +5,7 @@ class AnnouncementListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Vaccine Announcements")),
+      
       body: announcements.isEmpty
           ? Center(child: Text("No announcements yet."))
           : ListView.builder(

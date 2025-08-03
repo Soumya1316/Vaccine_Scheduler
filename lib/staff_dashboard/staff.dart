@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:vaccine_scheduler/login_page/login.dart';
 import 'package:vaccine_scheduler/staff_dashboard/announcement_add.dart';
 
 void main() {
-  runApp(const StaffDashboard());
+  runApp(const StaffDashboardApp());
 }
 
-class StaffDashboard extends StatelessWidget {
-  const StaffDashboard({super.key});
+class StaffDashboardApp extends StatelessWidget {
+  const StaffDashboardApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Staff Dashboard',
-      theme: ThemeData(primarySwatch: Colors.yellow),
+      theme: ThemeData(primarySwatch: Colors.teal),
       debugShowCheckedModeBanner: false,
-      home: StaffDashboard(),
+      home: const SdPage(),
     );
   }
 }
 
 class Vaccine {
   String name;
-  String dose;
-  bool available;
+  String doseInfo;
+  int quantity;
 
-  Vaccine({required this.name, required this.dose, this.available = true});
+  Vaccine({
+    required this.name,
+    required this.doseInfo,
+    this.quantity = 0,
+  });
 }
 
 class SdPage extends StatefulWidget {
@@ -36,9 +39,9 @@ class SdPage extends StatefulWidget {
 
 class _SdPageState extends State<SdPage> {
   List<Vaccine> vaccines = [
-    Vaccine(name: "BCG", dose: "Single Dose"),
-    Vaccine(name: "Polio", dose: "3 Doses"),
-    Vaccine(name: "Hepatitis B", dose: "3 Doses"),
+    Vaccine(name: "BCG", doseInfo: "Single Dose", quantity: 10),
+    Vaccine(name: "Polio", doseInfo: "3 Doses", quantity: 5),
+    Vaccine(name: "Hepatitis B", doseInfo: "3 Doses", quantity: 8),
   ];
 
   final _formKey = GlobalKey<FormState>();
@@ -49,66 +52,17 @@ class _SdPageState extends State<SdPage> {
     if (_formKey.currentState!.validate()) {
       setState(() {
         vaccines.add(
-          Vaccine(name: _nameController.text, dose: _doseController.text),
+          Vaccine(
+            name: _nameController.text,
+            doseInfo: _doseController.text,
+            quantity: 0,
+          ),
         );
       });
       _nameController.clear();
       _doseController.clear();
       Navigator.pop(context);
     }
-  }
-
-  void _editVaccine(int index) {
-    _nameController.text = vaccines[index].name;
-    _doseController.text = vaccines[index].dose;
-
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (_) => Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          top: 20,
-          left: 20,
-          right: 20,
-        ),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text("Edit Vaccine", style: TextStyle(fontSize: 18)),
-              TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: "Vaccine Name"),
-                validator: (value) =>
-                    value!.isEmpty ? "Enter vaccine name" : null,
-              ),
-              TextFormField(
-                controller: _doseController,
-                decoration: InputDecoration(labelText: "Dose Info"),
-                validator: (value) => value!.isEmpty ? "Enter dose info" : null,
-              ),
-              SizedBox(height: 10),
-              ElevatedButton(
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    setState(() {
-                      vaccines[index].name = _nameController.text;
-                      vaccines[index].dose = _doseController.text;
-                    });
-                    _nameController.clear();
-                    _doseController.clear();
-                    Navigator.pop(context);
-                  }
-                },
-                child: Text("Save Changes"),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   void _showAddVaccineForm() {
@@ -130,35 +84,85 @@ class _SdPageState extends State<SdPage> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text("Add Vaccine", style: TextStyle(fontSize: 18)),
+              const Text("Create New Vaccine Entry",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               TextFormField(
                 controller: _nameController,
-                decoration: InputDecoration(labelText: "Vaccine Name"),
+                decoration: const InputDecoration(labelText: "Vaccine Name"),
                 validator: (value) =>
                     value!.isEmpty ? "Enter vaccine name" : null,
               ),
               TextFormField(
                 controller: _doseController,
-                decoration: InputDecoration(labelText: "Dose Info"),
-                validator: (value) => value!.isEmpty ? "Enter dose info" : null,
+                decoration: const InputDecoration(labelText: "Dose Info"),
+                validator: (value) =>
+                    value!.isEmpty ? "Enter dose info" : null,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               ElevatedButton(
                 onPressed: _addVaccine,
-                child: Text("Add Vaccine"),
+                child: const Text("Add Vaccine"),
               ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => AddAnnouncementScreen()),
-                );
-              },
-              child: Text("Add Announcement"),
-            ),
-
+              const SizedBox(height: 10),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildVaccineCard(Vaccine vaccine, int index) {
+    return Card(
+      elevation: 3,
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      child: Padding(
+        padding: const EdgeInsets.all(14.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Vaccine name + quantity controls
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  vaccine.name,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.remove_circle,
+                          color: Colors.red, size: 28),
+                      onPressed: () {
+                        setState(() {
+                          if (vaccine.quantity > 0) vaccine.quantity--;
+                        });
+                      },
+                    ),
+                    Text(
+                      "${vaccine.quantity}",
+                      style: const TextStyle(fontSize: 18),
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.add_circle,
+                          color: Colors.green, size: 28),
+                      onPressed: () {
+                        setState(() {
+                          vaccine.quantity++;
+                        });
+                      },
+                    ),
+                  ],
+                )
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(
+              "Doses required: ${vaccine.doseInfo}",
+              style: const TextStyle(color: Colors.grey),
+            ),
+          ],
         ),
       ),
     );
@@ -167,50 +171,39 @@ class _SdPageState extends State<SdPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Staff Dashboard"), centerTitle: true),
-      body: ListView.builder(
-        itemCount: vaccines.length,
-        itemBuilder: (context, index) {
-          final vaccine = vaccines[index];
-          return Card(
-            margin: EdgeInsets.symmetric(vertical: 6, horizontal: 12),
-            child: ListTile(
-              title: Text(vaccine.name),
-              subtitle: Text(vaccine.dose),
-              trailing: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Switch(
-                    value: vaccine.available,
-                    onChanged: (val) {
-                      setState(() {
-                        vaccine.available = val;
-                      });
-                    },
-                    activeColor: Colors.green,
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.edit, color: Colors.blue),
-                    onPressed: () => _editVaccine(index),
-                  ),
-                  IconButton(
-                    icon: Icon(Icons.delete, color: Colors.red),
-                    onPressed: () {
-                      setState(() {
-                        vaccines.removeAt(index);
-                      });
-                    },
-                  ),
-                ],
+      backgroundColor: Colors.grey[100],
+      body: SafeArea(
+        child: Column(
+          children: [
+            const SizedBox(height: 20),
+            const Text(
+              "Welcome to Staff Dashboard",
+              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+            ElevatedButton.icon(
+              icon: const Icon(Icons.add),
+              label: const Text("Create New Vaccine Entry"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.teal,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              ),
+              onPressed: _showAddVaccineForm,
+            ),
+            const SizedBox(height: 15),
+            Expanded(
+              child: ListView.builder(
+                itemCount: vaccines.length,
+                itemBuilder: (context, index) {
+                  return _buildVaccineCard(vaccines[index], index);
+                },
               ),
             ),
-          );
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _showAddVaccineForm,
-        child: Icon(Icons.add),
+          ],
+        ),
       ),
     );
   }
 }
+
