@@ -13,11 +13,12 @@ class VaccineScheduler extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'VACCINE SCHEDULER',
+      debugShowCheckedModeBanner: false,
       home: const HomePage(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignUpScreen(),
-      }, // ✅ this comma and closing bracket was missing
+      },
     );
   }
 }

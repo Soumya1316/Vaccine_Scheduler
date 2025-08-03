@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:vaccine_scheduler/login_page/login.dart';
+import 'package:vaccine_scheduler/parent_dashboard/announcement_list.dart';
 
 class ParentDrawer extends StatelessWidget {
   final String email;
-  final Function(int)? onItemSelected; 
+  final Function(int) onItemSelected;
 
-  const ParentDrawer({super.key, required this.email, this.onItemSelected});
+  const ParentDrawer({
+    super.key,
+    required this.email,
+    required this.onItemSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,33 +28,41 @@ class ParentDrawer extends StatelessWidget {
           ListTile(
             leading: const Icon(Icons.home),
             title: const Text('Home'),
-            onTap: () {
-              onItemSelected?.call(0);
-              Navigator.pop(context);
-            },
+            onTap: () => onItemSelected(0),
           ),
           ListTile(
             leading: const Icon(Icons.calendar_month),
             title: const Text('Appointments'),
-            onTap: () {
-              onItemSelected?.call(1);
-              Navigator.pop(context);
-            },
+            onTap: () => onItemSelected(1),
           ),
           ListTile(
             leading: const Icon(Icons.child_care),
             title: const Text('Child Profile'),
-            onTap: () {
-              onItemSelected?.call(2);
-              Navigator.pop(context);
-            },
+            onTap: () => onItemSelected(2),
           ),
           ListTile(
             leading: const Icon(Icons.timeline),
             title: const Text('Vaccine Timeline'),
+            onTap: () => onItemSelected(3),
+          ),
+          ListTile(
+            leading: const Icon(Icons.help_outline),
+            title: const Text('FAQs'),
+            onTap: () => onItemSelected(4),
+          ),
+          ListTile(
+            leading: const Icon(Icons.medical_information),
+            title: const Text('More About Vaccines'),
+            onTap: () => onItemSelected(5),
+          ),
+          ListTile(
+            leading: Icon(Icons.announcement),
+            title: Text("Announcements"),
             onTap: () {
-              onItemSelected?.call(3);
-              Navigator.pop(context);
+              Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => AnnouncementListScreen()),
+            );
             },
           ),
           const Divider(),
