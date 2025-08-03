@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart'; // Adjust the path if needed
 
 class FAQs extends StatelessWidget {
-  const FAQs({super.key});
+  final String email;
+
+const FAQs({super.key, required this.email});
+
 
   final List<String> faqs = const [
     "Q1: How do I book a vaccine appointment?\nA: Go to the 'Book Appointment' section in the app.",
@@ -13,16 +17,10 @@ class FAQs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "FAQs",
-          style: TextStyle( fontSize: 28, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.indigoAccent,
-      ),
-      body: PageView.builder(
+    return BackToHomeWrapper(
+      title: "FAQs",
+      email: email, 
+      child: PageView.builder(
         itemCount: faqs.length,
         controller: PageController(viewportFraction: 0.85),
         itemBuilder: (context, index) {

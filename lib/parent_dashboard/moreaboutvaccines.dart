@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
+ // Adjust path as needed
 
 class MoreAboutVaccines extends StatelessWidget {
-  const MoreAboutVaccines({super.key});
+  final String email;
+
+const MoreAboutVaccines({super.key, required this.email});
+
 
   final List<String> vaccineInfo = const [
     "Vaccines work by training your immune system to recognize and fight specific diseases.",
@@ -14,16 +19,10 @@ class MoreAboutVaccines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "More About Vaccines",
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.green,
-      ),
-      body: PageView.builder(
+    return BackToHomeWrapper(
+      title: "More About Vaccines",
+      email: email, 
+      child: PageView.builder(
         itemCount: vaccineInfo.length,
         controller: PageController(viewportFraction: 0.85),
         itemBuilder: (context, index) {

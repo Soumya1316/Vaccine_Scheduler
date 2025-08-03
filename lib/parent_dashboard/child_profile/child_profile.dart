@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import '../widgets/back_to_home_wrapper.dart';
 
 class ChildProfilePage extends StatefulWidget {
-  const ChildProfilePage({super.key});
+  final String email;
+
+const ChildProfilePage({super.key, required this.email});
+
 
   @override
   State<ChildProfilePage> createState() => _ChildProfilePageState();
@@ -33,7 +37,6 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
       firstDate: DateTime(2000),
       lastDate: DateTime.now(),
     );
-
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
@@ -42,9 +45,7 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
   }
 
   Future<void> _pickImage() async {
-    final pickedFile = await ImagePicker().pickImage(
-      source: ImageSource.gallery,
-    );
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
       setState(() {
         _image = File(pickedFile.path);
@@ -69,16 +70,17 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final labelStyle = TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
+    final labelStyle = const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 
-    return Scaffold(
-      backgroundColor: Colors.lightBlue[50],
-      body: SingleChildScrollView(
+    return BackToHomeWrapper(
+      title: "Child Profile",
+      email: widget.email, 
+      child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Left Section (Form)
+            // Left Section
             Expanded(
               flex: 3,
               child: Column(
@@ -100,7 +102,6 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                         Text("${selectedDate!.day.toString().padLeft(2, '0')}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.year}"),
                     ],
                   ),
-
                   const SizedBox(height: 20),
                   Text("Gender", style: labelStyle),
                   Row(
@@ -128,22 +129,16 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                     ],
                   ),
                   const SizedBox(height: 30),
-
-                  // Previous Vaccinations
                   Text("Previous Vaccinations", style: labelStyle),
-
                   const SizedBox(height: 10),
                   Column(
-                    children: List.generate(vaccinationControllers.length, (
-                      index,
-                    ) {
+                    children: List.generate(vaccinationControllers.length, (index) {
                       return Row(
                         children: [
                           Expanded(
                             flex: 2,
                             child: TextField(
-                              controller:
-                                  vaccinationControllers[index]['vaccine'],
+                              controller: vaccinationControllers[index]['vaccine'],
                               decoration: InputDecoration(
                                 labelText: 'Vaccine Name ${index + 1}',
                               ),
@@ -160,10 +155,7 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                             ),
                           ),
                           IconButton(
-                            icon: const Icon(
-                              Icons.remove_circle,
-                              color: Colors.red,
-                            ),
+                            icon: const Icon(Icons.remove_circle, color: Colors.red),
                             onPressed: () => _removeVaccinationRow(index),
                           ),
                         ],
@@ -176,18 +168,13 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                     label: const Text("Add Vaccination"),
                   ),
                   const SizedBox(height: 20),
-
-                  // Save Button (at the very end)
                   ElevatedButton(
                     onPressed: () {
                       String name = nameController.text;
                       String dob = selectedDate != null
                           ? "${selectedDate!.day.toString().padLeft(2, '0')}-${selectedDate!.month.toString().padLeft(2, '0')}-${selectedDate!.year}"
                           : "Not selected";
-
-
                       String selectedGender = gender ?? "Not selected";
-
                       String vaccinations = vaccinationControllers
                           .asMap()
                           .entries
@@ -221,7 +208,7 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
 
             const SizedBox(width: 20),
 
-            // Right Section (Image Picker)
+            // Right Section (Image)
             Expanded(
               flex: 2,
               child: Column(
@@ -230,15 +217,9 @@ class _ChildProfilePageState extends State<ChildProfilePage> {
                     onTap: _pickImage,
                     child: CircleAvatar(
                       radius: 60,
-                      backgroundImage: _image != null
-                          ? FileImage(_image!)
-                          : null,
+                      backgroundImage: _image != null ? FileImage(_image!) : null,
                       child: _image == null
-                          ? const Icon(
-                              Icons.camera_alt,
-                              size: 40,
-                              color: Colors.grey,
-                            )
+                          ? const Icon(Icons.camera_alt, size: 40, color: Colors.grey)
                           : null,
                     ),
                   ),

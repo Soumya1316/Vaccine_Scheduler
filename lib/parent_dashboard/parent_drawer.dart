@@ -56,14 +56,9 @@ class ParentDrawer extends StatelessWidget {
             onTap: () => onItemSelected(5),
           ),
           ListTile(
-            leading: Icon(Icons.announcement),
-            title: Text("Announcements"),
-            onTap: () {
-              Navigator.push(
-              context,
-              MaterialPageRoute(builder: (_) => AnnouncementListScreen()),
-            );
-            },
+            leading: const Icon(Icons.announcement),
+            title: const Text("Announcements"),
+            onTap: () => onItemSelected(6),
           ),
           const Divider(),
           ListTile(

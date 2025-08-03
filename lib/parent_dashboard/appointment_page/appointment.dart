@@ -1,51 +1,45 @@
 import 'package:flutter/material.dart';
-import 'package:vaccine_scheduler/login_page/login.dart';
+import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
 
 class AppointmentScreen extends StatefulWidget {
   final String email;
 
-  const AppointmentScreen({super.key, required this.email});
+const AppointmentScreen({super.key, required this.email});
 
   @override
   State<AppointmentScreen> createState() => _AppointmentScreenState();
 }
 
 class _AppointmentScreenState extends State<AppointmentScreen> {
+  final TextEditingController vaccineController = TextEditingController();
   DateTime? selectedDate;
   TimeOfDay? selectedTime;
-  final TextEditingController vaccineController = TextEditingController();
-  String message = '';
+  String message = "";
 
-  void _pickDate() async {
-    DateTime? date = await showDatePicker(
+  Future<void> _pickDate() async {
+    final picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now().add(const Duration(days: 1)),
-      firstDate: DateTime.now(),
-      lastDate: DateTime(2100),
+      initialDate: DateTime.now(),
+      firstDate: DateTime.now().subtract(const Duration(days: 1)),
+      lastDate: DateTime(2030),
     );
-    if (date != null) {
-      setState(() {
-        selectedDate = date;
-      });
+    if (picked != null) {
+      setState(() => selectedDate = picked);
     }
   }
 
-  void _pickTime() async {
-    TimeOfDay? time = await showTimePicker(
+  Future<void> _pickTime() async {
+    final picked = await showTimePicker(
       context: context,
-      initialTime: const TimeOfDay(hour: 10, minute: 0),
+      initialTime: TimeOfDay.now(),
     );
-    if (time != null) {
-      setState(() {
-        selectedTime = time;
-      });
+    if (picked != null) {
+      setState(() => selectedTime = picked);
     }
   }
 
   void _submitAppointment() {
-    if (selectedDate == null ||
-        selectedTime == null ||
-        vaccineController.text.isEmpty) {
+    if (vaccineController.text.isEmpty || selectedDate == null || selectedTime == null) {
       setState(() {
         message = "Please fill all fields.";
       });
@@ -54,70 +48,63 @@ class _AppointmentScreenState extends State<AppointmentScreen> {
 
     setState(() {
       message =
-          "Appointment booked for ${vaccineController.text} on ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} at ${selectedTime!.format(context)}";
+          "Appointment for ${vaccineController.text} set on ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} at ${selectedTime!.format(context)}.";
+      vaccineController.clear();
+      selectedDate = null;
+      selectedTime = null;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final role = fakeUserDB[widget.email]?['role'] ?? 'Unknown';
-
-    return Scaffold(
-      body: Padding(
+    return BackToHomeWrapper(
+      title: "Appointments",
+      email: widget.email, 
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: role == 'Parent'
-            ? Column(
-                children: [
-                  Text("Logged in as ${widget.email} ($role)",
-                      style: const TextStyle(fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 20),
-                  TextField(
-                    controller: vaccineController,
-                    decoration: const InputDecoration(
-                      labelText: "Vaccine Name",
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: _pickDate,
-                          child: Text(selectedDate == null
-                              ? "Pick Date"
-                              : "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}"),
-                        ),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: ElevatedButton(
-                          onPressed: _pickTime,
-                          child: Text(selectedTime == null
-                              ? "Pick Time"
-                              : selectedTime!.format(context)),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  ElevatedButton(
-                    onPressed: _submitAppointment,
-                    child: const Text("Submit Appointment"),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(message,
-                      style:
-                          const TextStyle(color: Colors.teal, fontSize: 16)),
-                ],
-              )
-            : Center(
-                child: Text(
-                  "Appointments are only available for Parents.",
-                  style: const TextStyle(fontSize: 18, color: Colors.red),
-                  textAlign: TextAlign.center,
-                ),
+        child: Column(
+          children: [
+            TextField(
+              controller: vaccineController,
+              decoration: const InputDecoration(
+                labelText: "Vaccine Name",
+                border: OutlineInputBorder(),
               ),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              children: [
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _pickDate,
+                    child: Text(selectedDate == null
+                        ? "Pick Date"
+                        : "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}"),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _pickTime,
+                    child: Text(selectedTime == null
+                        ? "Pick Time"
+                        : selectedTime!.format(context)),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: _submitAppointment,
+              child: const Text("Submit Appointment"),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              message,
+              style: const TextStyle(color: Colors.teal, fontSize: 16),
+            ),
+          ],
+        ),
       ),
     );
   }

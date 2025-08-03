@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:vaccine_scheduler/parent_dashboard/announcement_list.dart';
 import 'appointment_page/appointment.dart';
 import 'package:vaccine_scheduler/parent_dashboard/child_profile/child_profile.dart';
-//import 'package:vaccine_scheduler/login_page/login.dart';
 import 'package:vaccine_scheduler/parent_dashboard/moreaboutvaccines.dart';
 import 'package:vaccine_scheduler/parent_dashboard/vaccine_timeline/timeline.dart';
 import 'package:vaccine_scheduler/parent_dashboard/home_landing/home_landing.dart';
@@ -11,6 +10,7 @@ import 'package:vaccine_scheduler/parent_dashboard/parent_drawer.dart';
 
 class ParentDashboard extends StatefulWidget {
   final String email;
+
   const ParentDashboard({super.key, required this.email});
 
   @override
@@ -25,15 +25,16 @@ class _ParentDashboardState extends State<ParentDashboard> {
   @override
   void initState() {
     super.initState();
-    _pages = [
-      ParentHomeLanding(email: widget.email),
-      AppointmentScreen(email: widget.email),
-      ChildProfilePage(),
-      VaccineTimeline(),
-      FAQs(),
-      MoreAboutVaccines(),
-      AnnouncementListScreen(),
-    ];
+   _pages = [
+  ParentHomeLanding(email: widget.email),
+  AppointmentScreen(email: widget.email),
+  ChildProfilePage(email: widget.email),
+  VaccineTimelinePage(email: widget.email),
+  FAQs(email: widget.email),
+  MoreAboutVaccines(email: widget.email),
+  AnnouncementListScreen(email: widget.email),
+];
+
   }
 
   @override

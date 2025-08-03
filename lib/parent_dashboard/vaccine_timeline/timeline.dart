@@ -1,22 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../widgets/back_to_home_wrapper.dart'; // Adjust path if needed
 
-void main() {
-  runApp(const VaccineTimeline());
-}
-
-class VaccineTimeline extends StatelessWidget {
-  const VaccineTimeline({super.key});
-  
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Vaccine Timeline',
-      debugShowCheckedModeBanner: false,
-      home: VaccineTimelinePage(),
-    );
-  }
-}
 class Vaccine {
   final String name;
   final DateTime date;
@@ -28,9 +13,11 @@ class Vaccine {
     this.completed = false,
   });
 }
-class VaccineTimelinePage extends StatefulWidget {
-  const VaccineTimelinePage({super.key});
 
+class VaccineTimelinePage extends StatefulWidget {
+  final String email;
+
+const VaccineTimelinePage({super.key, required this.email});
   @override
   State<VaccineTimelinePage> createState() => _VaccineTimelinePageState();
 }
@@ -46,9 +33,10 @@ class _VaccineTimelinePageState extends State<VaccineTimelinePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text("Vaccine Timeline")),
-      body: ListView.builder(
+    return BackToHomeWrapper(
+      title: "Vaccine Timeline",
+      email: widget.email, 
+      child: ListView.builder(
         itemCount: vaccineList.length,
         itemBuilder: (context, index) {
           final vaccine = vaccineList[index];
