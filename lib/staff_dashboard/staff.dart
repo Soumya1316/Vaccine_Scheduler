@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vaccine_scheduler/login_page/login.dart';
+import 'package:vaccine_scheduler/staff_dashboard/announcement_add.dart';
 
 void main() {
   runApp(const StaffDashboard());
@@ -146,6 +147,16 @@ class _SdPageState extends State<SdPage> {
                 onPressed: _addVaccine,
                 child: Text("Add Vaccine"),
               ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => AddAnnouncementScreen()),
+                );
+              },
+              child: Text("Add Announcement"),
+            ),
+
             ],
           ),
         ),

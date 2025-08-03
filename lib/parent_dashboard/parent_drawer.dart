@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:vaccine_scheduler/login_page/login.dart';
+import 'package:vaccine_scheduler/parent_dashboard/announcement_list.dart';
 
 class ParentDrawer extends StatelessWidget {
   final String email;
@@ -61,6 +62,16 @@ class ParentDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(builder: (_) => const LoginPage()),
                 (route) => false,
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.announcement),
+            title: Text("Announcements"),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => AnnouncementListScreen()),
               );
             },
           ),
