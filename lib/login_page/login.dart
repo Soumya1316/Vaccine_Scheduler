@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'package:vaccine_scheduler/parent_dashboard/pdashboard.dart';
-import 'package:vaccine_scheduler/staff_dashboard/staff.dart';
+import 'package:vaccine_scheduler/staff_dashboard/sdashboard.dart';
 
 
 Map<String, Map<String, String>> fakeUserDB = {}; // email: {password, role}
@@ -44,7 +44,7 @@ void login() {
   Navigator.pushReplacement(
     context,
     MaterialPageRoute(
-      builder: (_) => SdPage(email: email),
+      builder: (_) => StaffDashboard(email: email),
     ),
   );
 }
