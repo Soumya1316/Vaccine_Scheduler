@@ -1,73 +1,89 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../widgets/back_to_home_wrapper.dart'; 
 
 class Vaccine {
   final String name;
-  final DateTime date;
   bool completed;
 
   Vaccine({
     required this.name,
-    required this.date,
     this.completed = false,
   });
+}
+
+class Year {
+  final int year;
+  final List<Vaccine> vaccines;
+
+  Year({required this.year, required this.vaccines});
 }
 
 class VaccineTimeline extends StatefulWidget {
   final String email;
 
-const VaccineTimeline({super.key, required this.email});
+  const VaccineTimeline({super.key, required this.email});
+
   @override
   State<VaccineTimeline> createState() => _VaccineTimelineState();
 }
 
 class _VaccineTimelineState extends State<VaccineTimeline> {
-  List<Vaccine> vaccineList = [
-    Vaccine(name: "BCG", date: DateTime(2025, 9, 1)),
-    Vaccine(name: "Hepatitis B", date: DateTime(2025, 9, 15)),
-    Vaccine(name: "Polio", date: DateTime(2025, 10, 1)),
-    Vaccine(name: "DTP", date: DateTime(2025, 11, 15)),
-    Vaccine(name: "MMR", date: DateTime(2026, 1, 5)),
+
+  List<Year> vaccineData = [
+    Year(
+      year: 2024,
+      vaccines: [
+        Vaccine(name: 'Flu Vaccine'),
+        Vaccine(name: 'COVID-19 Booster'),
+        Vaccine(name: 'Hepatitis B'),
+      ],
+    ),
+    Year(
+      year: 2025,
+      vaccines: [
+        Vaccine(name: 'Tetanus Shot'),
+        Vaccine(name: 'Polio'),
+      ],
+    ),
+    Year(
+      year: 2026,
+      vaccines: [
+        Vaccine(name: 'Measles, Mumps, Rubella (MMR)'),
+        Vaccine(name: 'Varicella (Chickenpox)'),
+      ],
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     return BackToHomeWrapper(
       title: "Vaccine Timeline",
-      email: widget.email, 
+      email: widget.email,
       child: ListView.builder(
-        itemCount: vaccineList.length,
+        itemCount: vaccineData.length,
         itemBuilder: (context, index) {
-          final vaccine = vaccineList[index];
-          final isUpcoming = DateTime.now().isBefore(vaccine.date);
-
+          final year = vaccineData[index];
           return Card(
             margin: const EdgeInsets.all(10),
-            elevation: 3,
-            child: ListTile(
-              leading: Icon(
-                vaccine.completed
-                    ? Icons.check_circle
-                    : Icons.circle_outlined,
-                color: vaccine.completed
-                    ? Colors.green
-                    : (isUpcoming ? Colors.orange : Colors.grey),
+            child: ExpansionTile(
+              title: Text(
+                'Year ${year.year}',
+                style: const TextStyle(
+                  fontSize: 18.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              title: Text(vaccine.name),
-              subtitle: Text(
-                "Scheduled: ${DateFormat('yyyy-MM-dd').format(vaccine.date)}",
-              ),
-              trailing: !vaccine.completed
-                  ? ElevatedButton(
-                      child: const Text("Mark Done"),
-                      onPressed: () {
-                        setState(() {
-                          vaccine.completed = true;
-                        });
-                      },
-                    )
-                  : const Icon(Icons.check, color: Colors.green),
+              children: year.vaccines.map((vaccine) {
+                return CheckboxListTile(
+                  title: Text(vaccine.name),
+                  value: vaccine.completed,
+                  onChanged: (bool? newValue) {
+                    setState(() {
+                      vaccine.completed = newValue ?? false;
+                    });
+                  },
+                );
+              }).toList(),
             ),
           );
         },
