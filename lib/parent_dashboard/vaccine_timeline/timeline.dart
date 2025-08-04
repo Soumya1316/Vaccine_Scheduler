@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../widgets/back_to_home_wrapper.dart'; // Adjust path if needed
+import '../widgets/back_to_home_wrapper.dart'; 
 
 class Vaccine {
   final String name;
@@ -14,15 +14,15 @@ class Vaccine {
   });
 }
 
-class VaccineTimelinePage extends StatefulWidget {
+class VaccineTimeline extends StatefulWidget {
   final String email;
 
-const VaccineTimelinePage({super.key, required this.email});
+const VaccineTimeline({super.key, required this.email});
   @override
-  State<VaccineTimelinePage> createState() => _VaccineTimelinePageState();
+  State<VaccineTimeline> createState() => _VaccineTimelineState();
 }
 
-class _VaccineTimelinePageState extends State<VaccineTimelinePage> {
+class _VaccineTimelineState extends State<VaccineTimeline> {
   List<Vaccine> vaccineList = [
     Vaccine(name: "BCG", date: DateTime(2025, 9, 1)),
     Vaccine(name: "Hepatitis B", date: DateTime(2025, 9, 15)),

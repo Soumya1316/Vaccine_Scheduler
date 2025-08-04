@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
 
-class AppointmentScreen extends StatefulWidget {
+class Appointments extends StatefulWidget {
   final String email;
 
-const AppointmentScreen({super.key, required this.email});
+const Appointments({super.key, required this.email});
 
   @override
-  State<AppointmentScreen> createState() => _AppointmentScreenState();
+  State<Appointments> createState() => _AppointmentsState();
 }
 
-class _AppointmentScreenState extends State<AppointmentScreen> {
+class _AppointmentsState extends State<Appointments> {
   final TextEditingController vaccineController = TextEditingController();
   DateTime? selectedDate;
   TimeOfDay? selectedTime;

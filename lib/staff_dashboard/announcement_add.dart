@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:vaccine_scheduler/announcements.dart';
 
 
-class AddAnnouncementScreen extends StatefulWidget {
+class AddAnnouncement extends StatefulWidget {
+  const AddAnnouncement({super.key});
   @override
-  State<AddAnnouncementScreen> createState() => _AddAnnouncementScreenState();
+  State<AddAnnouncement> createState() => _AddAnnouncementState();
 }
 
-class _AddAnnouncementScreenState extends State<AddAnnouncementScreen> {
+class _AddAnnouncementState extends State<AddAnnouncement> {
   final titleController = TextEditingController();
   final descriptionController = TextEditingController();
   String message = '';

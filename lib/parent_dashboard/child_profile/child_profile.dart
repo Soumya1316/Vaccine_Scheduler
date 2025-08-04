@@ -3,17 +3,17 @@ import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import '../widgets/back_to_home_wrapper.dart';
 
-class ChildProfilePage extends StatefulWidget {
+class ChildProfile extends StatefulWidget {
   final String email;
 
-const ChildProfilePage({super.key, required this.email});
+const ChildProfile({super.key, required this.email});
 
 
   @override
-  State<ChildProfilePage> createState() => _ChildProfilePageState();
+  State<ChildProfile> createState() => _ChildProfileState();
 }
 
-class _ChildProfilePageState extends State<ChildProfilePage> {
+class _ChildProfileState extends State<ChildProfile> {
   final nameController = TextEditingController();
   DateTime? selectedDate;
   String? gender;

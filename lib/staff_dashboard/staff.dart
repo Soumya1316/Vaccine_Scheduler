@@ -1,23 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:vaccine_scheduler/staff_dashboard/announcement_add.dart';
-
-void main() {
-  runApp(const StaffDashboardApp());
-}
-
-class StaffDashboardApp extends StatelessWidget {
-  const StaffDashboardApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Staff Dashboard',
-      theme: ThemeData(primarySwatch: Colors.teal),
-      debugShowCheckedModeBanner: false,
-      home: const SdPage(),
-    );
-  }
-}
 
 class Vaccine {
   String name;
@@ -32,7 +13,9 @@ class Vaccine {
 }
 
 class SdPage extends StatefulWidget {
-  const SdPage({super.key});
+  final String email;
+  const SdPage({super.key, required this.email});
+
   @override
   State<SdPage> createState() => _SdPageState();
 }
@@ -176,6 +159,11 @@ class _SdPageState extends State<SdPage> {
         child: Column(
           children: [
             const SizedBox(height: 20),
+            Text(
+              "Welcome ${widget.email}",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(height: 10),
             const Text(
               "Welcome to Staff Dashboard",
               style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
@@ -206,4 +194,3 @@ class _SdPageState extends State<SdPage> {
     );
   }
 }
-

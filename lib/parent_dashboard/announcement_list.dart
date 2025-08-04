@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vaccine_scheduler/announcements.dart';
 import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
 
-class AnnouncementListScreen extends StatelessWidget {
+class AnnouncementList extends StatelessWidget {
   final String email;
 
-  const AnnouncementListScreen({super.key, required this.email});
+  const AnnouncementList({super.key, required this.email});
 
   @override
   Widget build(BuildContext context) {

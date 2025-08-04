@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:vaccine_scheduler/login_page/login.dart';
-import 'package:vaccine_scheduler/parent_dashboard/announcement_list.dart';
+import 'package:vaccine_scheduler/login_page/role_selection.dart';
 
 class ParentDrawer extends StatelessWidget {
   final String email;
@@ -62,16 +61,18 @@ class ParentDrawer extends StatelessWidget {
           ),
           const Divider(),
           ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
-            onTap: () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => const LoginPage()),
-                (route) => false,
-              );
-            },
-          ),
+                  leading: const Icon(Icons.logout),
+                  title: const Text('Logout'),
+                  onTap: () {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const RoleSelection(),
+                      ),
+                      (route) => false,
+                    );
+                  },
+),
         ],
       ),
     );

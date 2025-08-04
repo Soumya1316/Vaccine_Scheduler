@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'login.dart'; // to access fakeUserDB
 
-class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+class SignUp extends StatefulWidget {
+  final String role;
+
+  const SignUp({super.key, required this.role});
 
   @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpState extends State<SignUp> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   String message = '';
-  String role = 'Parent';
 
   void signUp() {
     final email = emailController.text.trim();
@@ -25,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } else {
       fakeUserDB[email] = {
         'password': password,
-        'role': role,
+        'role': widget.role.toLowerCase(),
       };
       setState(() {
         message = "Account created! You can now login.";
@@ -41,18 +42,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            DropdownButton<String>(
-              value: role,
-              items: const [
-                DropdownMenuItem(value: 'Parent', child: Text('Parent')),
-                DropdownMenuItem(value: 'Staff', child: Text('Staff')),
-              ],
-              onChanged: (value) {
-                setState(() {
-                  role = value!;
-                });
-              },
-            ),
             TextField(
               controller: emailController,
               decoration: const InputDecoration(labelText: "Email"),
@@ -63,20 +52,32 @@ class _SignUpScreenState extends State<SignUpScreen> {
               decoration: const InputDecoration(labelText: "Password"),
             ),
             const SizedBox(height: 10),
-            ElevatedButton(onPressed: signUp, child: const Text("Create Account")),
+            ElevatedButton(
+              onPressed: signUp,
+              child: const Text("Create Account"),
+            ),
             const SizedBox(height: 10),
-            Text(message, style: TextStyle(color: message.contains("already") ? Colors.red : Colors.green)),
+            Text(
+              message,
+              style: TextStyle(
+                color: message.contains("already") ? Colors.red : Colors.green,
+              ),
+            ),
             if (message.contains("Account created"))
               TextButton(
                 onPressed: () {
-                Navigator.pushNamed(context, '/login');
+                 Navigator.push(
+                      context,
+                    MaterialPageRoute(
+                      builder: (_) => LoginPage(role: widget.role),
+                    ),
+);
                 },
                 child: const Text("Now Login"),
-                ),
+              ),
           ],
         ),
       ),
     );
   }
 }
-

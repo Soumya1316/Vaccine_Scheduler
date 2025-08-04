@@ -27,12 +27,12 @@ class _ParentDashboardState extends State<ParentDashboard> {
     super.initState();
    _pages = [
   ParentHomeLanding(email: widget.email),
-  AppointmentScreen(email: widget.email),
-  ChildProfilePage(email: widget.email),
-  VaccineTimelinePage(email: widget.email),
+  Appointments(email: widget.email),
+  ChildProfile(email: widget.email),
+  VaccineTimeline(email: widget.email),
   FAQs(email: widget.email),
   MoreAboutVaccines(email: widget.email),
-  AnnouncementListScreen(email: widget.email),
+  AnnouncementList(email: widget.email),
 ];
 
   }

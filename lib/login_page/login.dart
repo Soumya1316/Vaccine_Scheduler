@@ -7,7 +7,9 @@ import 'package:vaccine_scheduler/staff_dashboard/staff.dart';
 Map<String, Map<String, String>> fakeUserDB = {}; // email: {password, role}
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  final String role;
+const LoginPage({super.key, required this.role});
+
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -26,17 +28,31 @@ void login() {
       fakeUserDB[email]!['password'] == password) {
     String role = fakeUserDB[email]!['role'] ?? 'Parent';
 
-    if (role == 'Staff') {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => const SdPage()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => ParentDashboard(email: email)),
-      );
-    }
+    if (role == 'Parent') {
+  Navigator.pushReplacement(context,
+    MaterialPageRoute(builder: (_) => ParentDashboard(email: email,))
+    );
+} else {
+ if (role == 'parent') {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (_) => ParentDashboard(email: email),
+    ),
+  );
+} else {
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (_) => SdPage(email: email),
+    ),
+  );
+}
+
+
+
+}
+
   } else {
     setState(() {
       message = "Invalid email or password!";
@@ -65,14 +81,16 @@ void login() {
             const SizedBox(height: 10),
             ElevatedButton(onPressed: login, child: const Text("Login")),
             TextButton(
-              child: const Text("Don't have an account? Sign up"),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const SignUpScreen()),
-                );
-              },
-            ),
+  child: const Text("Don't have an account? Sign up"),
+  onPressed: () {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (_) => SignUp(role: widget.role),
+      ),
+    );
+  },
+),
             const SizedBox(height: 10),
             Text(message, style: const TextStyle(color: Colors.red)),
           ],
