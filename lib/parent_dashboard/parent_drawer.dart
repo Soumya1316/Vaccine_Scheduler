@@ -14,67 +14,76 @@ class ParentDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
+      backgroundColor: Colors.white,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.blue),
-            child: Text(
-              "Welcome, $email",
-              style: const TextStyle(color: Colors.white, fontSize: 18),
+          Container(
+            width: double.infinity,
+            color: Colors.blue,
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
+            child: Row(
+              children: [
+                const CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.person, color: Colors.blue),
+                ),
+                const SizedBox(width: 12),
+                Expanded(
+                  child: Text(
+                    "Welcome,\n$email",
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      height: 1.3,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
-            onTap: () => onItemSelected(0),
-          ),
-          ListTile(
-            leading: const Icon(Icons.calendar_month),
-            title: const Text('Appointments'),
-            onTap: () => onItemSelected(1),
-          ),
-          ListTile(
-            leading: const Icon(Icons.child_care),
-            title: const Text('Child Profile'),
-            onTap: () => onItemSelected(2),
-          ),
-          ListTile(
-            leading: const Icon(Icons.timeline),
-            title: const Text('Vaccine Timeline'),
-            onTap: () => onItemSelected(3),
-          ),
-          ListTile(
-            leading: const Icon(Icons.help_outline),
-            title: const Text('FAQs'),
-            onTap: () => onItemSelected(4),
-          ),
-          ListTile(
-            leading: const Icon(Icons.medical_information),
-            title: const Text('More About Vaccines'),
-            onTap: () => onItemSelected(5),
-          ),
-          ListTile(
-            leading: const Icon(Icons.announcement),
-            title: const Text("Announcements"),
-            onTap: () => onItemSelected(6),
-          ),
+          const SizedBox(height: 8),
+          _buildTile(Icons.home, 'Home', () => onItemSelected(0)),
+          _buildTile(Icons.calendar_month, 'Appointments', () => onItemSelected(1)),
+          _buildTile(Icons.child_care, 'Child Profile', () => onItemSelected(2)),
+          _buildTile(Icons.timeline, 'Vaccine Timeline', () => onItemSelected(3)),
+          _buildTile(Icons.help_outline, 'FAQs', () => onItemSelected(4)),
+          _buildTile(Icons.medical_information, 'More About Vaccines', () => onItemSelected(5)),
+          _buildTile(Icons.announcement, 'Announcements', () => onItemSelected(6)),
+          const Spacer(),
           const Divider(),
-          ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text('Logout'),
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const RoleSelection(),
-                      ),
-                      (route) => false,
-                    );
-                  },
-),
+          _buildTile(
+            Icons.logout,
+            'Logout',
+            () {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => const RoleSelection()),
+                (route) => false,
+              );
+            },
+            iconColor: Colors.red,
+            textColor: Colors.red,
+          ),
+          const SizedBox(height: 8),
         ],
       ),
     );
   }
+
+  Widget _buildTile(IconData icon, String label, VoidCallback onTap,
+      {Color iconColor = Colors.black87, Color textColor = Colors.black87}) {
+    return ListTile(
+      leading: Icon(icon, color: iconColor),
+      title: Text(
+        label,
+        style: TextStyle(
+          fontSize: 15,
+          color: textColor,
+        ),
+      ),
+      onTap: onTap,
+    );
+  }
 }
+
