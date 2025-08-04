@@ -22,22 +22,35 @@ class _StaffDashboardState extends State<StaffDashboard> {
     super.initState();
     _pages = [
       StaffHome(email: widget.email),
-      AddAnnouncement(),
+      const AddAnnouncement(),
       SdPage(email: widget.email),
     ];
   }
 
-  final List<String> _titles = ["Home", "Announcements", "Staff Dashboard"];
+  final List<String> _titles = ["Staff Home", "Add Announcement", "Vaccine Stock"];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_titles[_selectedIndex])),
+      backgroundColor: const Color(0xFFF1F6FA),
+      appBar: AppBar(
+        title: Text(
+          _titles[_selectedIndex],
+          style: const TextStyle(
+            fontWeight: FontWeight.w600,
+            fontSize: 20,
+            letterSpacing: 0.5,
+          ),
+        ),
+        backgroundColor: const Color(0xFF2F4F6F),
+        centerTitle: true,
+        elevation: 2,
+      ),
       drawer: StaffDrawer(
         email: widget.email,
         onItemSelected: (index) {
           setState(() => _selectedIndex = index);
-          Navigator.pop(context);
+          Navigator.pop(context); // Close the drawer
         },
       ),
       body: _pages[_selectedIndex],
