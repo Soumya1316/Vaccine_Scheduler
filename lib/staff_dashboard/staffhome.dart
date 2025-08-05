@@ -8,10 +8,10 @@ class StaffHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 206, 242, 255), // Light blue bg
+      backgroundColor: const Color.fromARGB(255, 206, 242, 255),
       appBar: AppBar(
         title: const Text('STAFF DASHBOARD'),
-        backgroundColor: const Color.fromARGB(255, 129, 177, 199), // Dark blue
+        backgroundColor: const Color.fromARGB(255, 129, 177, 199),
         centerTitle: true,
       ),
       body: Center(

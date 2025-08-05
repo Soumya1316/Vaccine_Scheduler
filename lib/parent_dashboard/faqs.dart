@@ -36,78 +36,78 @@ class FAQs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BackToHomeWrapper(
-      title: "FAQs",
-      email: email,
-      child: Container(
+    return Scaffold(
+      body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFFEAF6FF), Color(0xFFD6E4F0)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
+            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
         ),
-        child: PageView.builder(
-          itemCount: faqs.length,
-          controller: PageController(viewportFraction: 0.9),
-          itemBuilder: (context, index) {
-            final faq = faqs[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-              child: Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                elevation: 8,
-                color: Colors.white,
-                child: Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // Icon/emoji
-                      Text(
-                        faq["icon"]!,
-                        style: const TextStyle(fontSize: 40),
+        child: SafeArea(
+          child: BackToHomeWrapper(
+            title: "FAQs",
+            email: email,
+            child: Expanded(
+              child: PageView.builder(
+                itemCount: faqs.length,
+                controller: PageController(viewportFraction: 0.9),
+                itemBuilder: (context, index) {
+                  final faq = faqs[index];
+                  return Padding(
+                    padding:
+                        const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
                       ),
-                      const SizedBox(height: 16),
-
-                      // Question
-                      Text(
-                        faq["question"]!,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF2F4F6F),
+                      elevation: 8,
+                      color: Colors.white,
+                      child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              faq["icon"]!,
+                              style: const TextStyle(fontSize: 40),
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              faq["question"]!,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 22,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF2F4F6F),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            Container(
+                              height: 2,
+                              width: 60,
+                              color: Colors.tealAccent,
+                            ),
+                            const SizedBox(height: 16),
+                            Text(
+                              faq["answer"]!,
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                color: Color(0xFF4A4A4A),
+                                height: 1.5,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                      const SizedBox(height: 16),
-
-                      // Line graphic
-                      Container(
-                        height: 2,
-                        width: 60,
-                        color: Colors.blueAccent.withOpacity(0.5),
-                      ),
-                      const SizedBox(height: 16),
-
-                      // Answer
-                      Text(
-                        faq["answer"]!,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                          fontSize: 16,
-                          color: Color(0xFF4A4A4A),
-                          height: 1.5,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               ),
-            );
-          },
+            ),
+          ),
         ),
       ),
     );
