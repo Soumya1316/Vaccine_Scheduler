@@ -12,8 +12,8 @@ class RoleSelection extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // center vertically
-          crossAxisAlignment: CrossAxisAlignment.stretch, // buttons stretch full width
+          mainAxisAlignment: MainAxisAlignment.center, 
+          crossAxisAlignment: CrossAxisAlignment.stretch, 
           children: [
             const Text(
               "Select Your Role",
@@ -46,14 +46,7 @@ class RoleSelection extends StatelessWidget {
               },
               child: const Text("I'm a Staff Member"),
             ),
-
-            const SizedBox(height: 10),
-            const Text(
-              "You can change this later from your profile.",
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 12, color: Colors.black54),
-            )
-          ],
+            ],
         ),
       ),
     );
