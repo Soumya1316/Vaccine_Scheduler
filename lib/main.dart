@@ -1,7 +1,13 @@
-import 'package:flutter/material.dart';
-import 'package:vaccine_scheduler/login_page/role_selection.dart';
 
-void main() {
+import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:vaccine_scheduler/firebase_options.dart';
+import 'login_page/login.dart';
+import 'package:vaccine_scheduler/login_page/signup.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(const VaccineScheduler());
 }
 
@@ -11,135 +17,132 @@ class VaccineScheduler extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Vaccine Scheduler',
+      title: 'VACCINE SCHEDULER',
       debugShowCheckedModeBanner: false,
-      home: const RoleSelection(),
+      home: const HomePage(),
     );
   }
 }
 
-class Vaccine {
-  final String name;
-  bool completed;
-
-  Vaccine({required this.name, this.completed = false});
-}
-
-class Year {
-  final int year;
-  final List<Vaccine> vaccines;
-
-  Year({required this.year, required this.vaccines});
-}
-
-class VaccineTimeline extends StatefulWidget {
-  final String email;
-
-  const VaccineTimeline({super.key, required this.email});
-
-  @override
-  State<VaccineTimeline> createState() => _VaccineTimelineState();
-}
-
-class _VaccineTimelineState extends State<VaccineTimeline> {
-  List<Year> vaccineData = [
-    Year(
-      year: 2024,
-      vaccines: [
-        Vaccine(name: 'Flu Vaccine'),
-        Vaccine(name: 'COVID-19 Booster'),
-        Vaccine(name: 'Hepatitis B'),
-      ],
-    ),
-    Year(
-      year: 2025,
-      vaccines: [
-        Vaccine(name: 'Tetanus Shot'),
-        Vaccine(name: 'Polio'),
-      ],
-    ),
-    Year(
-      year: 2026,
-      vaccines: [
-        Vaccine(name: 'MMR (Measles, Mumps, Rubella)'),
-        Vaccine(name: 'Varicella (Chickenpox)'),
-      ],
-    ),
-  ];
-
-  Color getYearColor(int year) {
-    switch (year) {
-      case 2024:
-        return Colors.blue.shade50;
-      case 2025:
-        return Colors.green.shade50;
-      case 2026:
-        return Colors.purple.shade50;
-      default:
-        return Colors.grey.shade100;
-    }
-  }
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Vaccine Timeline'),
-        backgroundColor: Colors.teal,
-      ),
-      body: ListView.builder(
-        itemCount: vaccineData.length,
-        itemBuilder: (context, index) {
-          final year = vaccineData[index];
-          int completed = year.vaccines.where((v) => v.completed).length;
-          int total = year.vaccines.length;
-          double progress = total == 0 ? 0 : completed / total;
-
-          return Card(
-            margin: const EdgeInsets.all(12),
-            color: getYearColor(year.year),
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            elevation: 4,
-            child: ExpansionTile(
-              tilePadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-              title: Text(
-                'Year ${year.year}',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.teal,
-                ),
+      body: Stack(
+        children: [
+          // Background gradient
+          Container(
+            width: double.infinity,
+            height: double.infinity,
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color.fromARGB(255, 66, 191, 245),
+                  Color.fromARGB(255, 15, 20, 186),
+                ],
               ),
-              subtitle: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: LinearProgressIndicator(
-                  value: progress,
-                  backgroundColor: Colors.grey.shade300,
-                  color: Colors.teal,
-                  minHeight: 6,
-                ),
-              ),
-              children: year.vaccines.map((vaccine) {
-                return CheckboxListTile(
-                  controlAffinity: ListTileControlAffinity.leading,
-                  title: Row(
-                    children: [
-                      const Icon(Icons.vaccines, color: Colors.teal),
-                      const SizedBox(width: 10),
-                      Expanded(child: Text(vaccine.name)),
-                    ],
-                  ),
-                  value: vaccine.completed,
-                  onChanged: (bool? newValue) {
-                    setState(() {
-                      vaccine.completed = newValue ?? false;
-                    });
-                  },
-                );
-              }).toList(),
             ),
-          );
-        },
+          ),
+
+          // Decorative circles
+          Positioned(
+            top: -40,
+            left: -30,
+            child: _decorativeCircle(120),
+          ),
+          Positioned(
+            bottom: -50,
+            right: -40,
+            child: _decorativeCircle(150),
+          ),
+
+          // Foreground card
+          Center(
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 40),
+              margin: const EdgeInsets.symmetric(horizontal: 24),
+              decoration: BoxDecoration(
+                color: Colors.white.withOpacity(0.95),
+                borderRadius: BorderRadius.circular(24),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.1),
+                    blurRadius: 20,
+                    offset: const Offset(0, 10),
+                  ),
+                ],
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(Icons.vaccines_rounded, size: 80, color: Color.fromARGB(255, 15, 20, 186)),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Welcome to Vaccine Scheduler',
+                    style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 15, 20, 186),
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 30),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const LoginPage(role: 'parent')),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 66, 191, 245),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text('Login as Parent'),
+                  ),
+                  const SizedBox(height: 16),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const LoginPage(role: 'staff')),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromARGB(255, 15, 20, 186),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: const Text('Login as Staff'),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  // Helper for decorative background circles
+  Widget _decorativeCircle(double size) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.white24,
       ),
     );
   }

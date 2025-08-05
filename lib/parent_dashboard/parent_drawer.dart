@@ -14,67 +14,80 @@ class ParentDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            decoration: const BoxDecoration(color: Colors.blue),
-            child: Text(
-              "Welcome, $email",
-              style: const TextStyle(color: Colors.white, fontSize: 18),
-            ),
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
-            onTap: () => onItemSelected(0),
-          ),
-          ListTile(
-            leading: const Icon(Icons.calendar_month),
-            title: const Text('Appointments'),
-            onTap: () => onItemSelected(1),
-          ),
-          ListTile(
-            leading: const Icon(Icons.child_care),
-            title: const Text('Child Profile'),
-            onTap: () => onItemSelected(2),
-          ),
-          ListTile(
-            leading: const Icon(Icons.timeline),
-            title: const Text('Vaccine Timeline'),
-            onTap: () => onItemSelected(3),
-          ),
-          ListTile(
-            leading: const Icon(Icons.help_outline),
-            title: const Text('FAQs'),
-            onTap: () => onItemSelected(4),
-          ),
-          ListTile(
-            leading: const Icon(Icons.medical_information),
-            title: const Text('More About Vaccines'),
-            onTap: () => onItemSelected(5),
-          ),
-          ListTile(
-            leading: const Icon(Icons.announcement),
-            title: const Text("Announcements"),
-            onTap: () => onItemSelected(6),
-          ),
-          const Divider(),
-          ListTile(
-                  leading: const Icon(Icons.logout),
-                  title: const Text('Logout'),
-                  onTap: () {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const RoleSelection(),
+        ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(Icons.account_circle, size: 64, color: Colors.white),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      "Welcome,\n$email",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        height: 1.3,
                       ),
-                      (route) => false,
-                    );
-                  },
-),
-        ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(color: Colors.white24, thickness: 0.4),
+
+            _buildDrawerItem(Icons.home, 'Home', 0),
+            _buildDrawerItem(Icons.calendar_month, 'Appointments', 1),
+            _buildDrawerItem(Icons.child_care, 'Child Profile', 2),
+            _buildDrawerItem(Icons.timeline, 'Vaccine Timeline', 3),
+            _buildDrawerItem(Icons.help_outline, 'FAQs', 4),
+            _buildDrawerItem(Icons.medical_information, 'More About Vaccines', 5),
+            _buildDrawerItem(Icons.announcement, 'Announcements', 6),
+
+            const Divider(color: Colors.white24, thickness: 0.4),
+
+            ListTile(
+              leading: const Icon(Icons.logout, color: Colors.white),
+              title: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const RoleSelection()),
+                  (route) => false,
+                );
+              },
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(IconData icon, String title, int index) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.white),
+      title: Text(
+        title,
+        style: const TextStyle(color: Colors.white),
+      ),
+      onTap: () => onItemSelected(index),
     );
   }
 }
