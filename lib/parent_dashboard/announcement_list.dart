@@ -7,91 +7,99 @@ class AnnouncementList extends StatelessWidget {
 
   const AnnouncementList({super.key, required this.email});
 
+  Color _getCardColor(int index) {
+    final colors = [
+      Colors.pink.shade100,
+      Colors.orange.shade100,
+      Colors.green.shade100,
+      Colors.blue.shade100,
+      Colors.purple.shade100,
+    ];
+    return colors[index % colors.length];
+  }
+
   @override
   Widget build(BuildContext context) {
-    return BackToHomeWrapper(
-      title: "Announcements",
-      email: email,
-      child: Container(
-        color: const Color(0xFFF4F6FA), // subtle background
-        child: PageView.builder(
-          itemCount: announcements.isEmpty ? 1 : announcements.length,
-          controller: PageController(viewportFraction: 0.9),
-          itemBuilder: (context, index) {
-            if (announcements.isEmpty) {
-              return const Center(
-                child: Text(
-                  "No announcements yet.",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey,
-                  ),
-                ),
-              );
-            }
-
-            final a = announcements[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 4),
-              child: Material(
-                elevation: 6,
-                borderRadius: BorderRadius.circular(20),
-                shadowColor: Colors.black26,
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    gradient: const LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Color(0xFF819ee5), Color(0xFF5774ba)],
+    return Scaffold(
+      body: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: BackToHomeWrapper(
+            title: "Announcements",
+            email: email,
+            child: announcements.isEmpty
+                ? const Center(
+                    child: Text(
+                      "No announcements yet.",
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Colors.white70,
+                      ),
                     ),
+                  )
+                : PageView.builder(
+                    itemCount: announcements.length,
+                    controller: PageController(viewportFraction: 0.85),
+                    itemBuilder: (context, index) {
+                      final a = announcements[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 40, horizontal: 8),
+                        child: Card(
+                          elevation: 6,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          color: _getCardColor(index),
+                          child: Padding(
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Icon(Icons.announcement_rounded,
+                                    size: 40, color: Colors.black87),
+                                const SizedBox(height: 16),
+                                Text(
+                                  a.title,
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.bold,
+                                    color: Color(0xFF1A2A3A),
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 12),
+                                Text(
+                                  a.description,
+                                  style: const TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black87,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 20),
+                                Text(
+                                  "Posted on: ${a.date.day}/${a.date.month}/${a.date.year}",
+                                  style: const TextStyle(
+                                    color: Colors.black54,
+                                    fontStyle: FontStyle.italic,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 20, vertical: 30),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.campaign_rounded,
-                          size: 48,
-                          color: Colors.white,
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          a.title,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        Text(
-                          a.description,
-                          textAlign: TextAlign.center,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.white70,
-                          ),
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          "📅 ${a.date.day}/${a.date.month}/${a.date.year}",
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.white60,
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            );
-          },
+          ),
         ),
       ),
     );

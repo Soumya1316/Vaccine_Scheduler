@@ -7,46 +7,97 @@ class RoleSelection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Select Role")),
-      backgroundColor: const Color(0xFFE6F0FA), // very light blue
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, 
-          crossAxisAlignment: CrossAxisAlignment.stretch, 
-          children: [
-            const Text(
-              "Select Your Role",
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.normal,
-                color: Colors.black87,
-              ),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 30),
-
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => AuthPage(role: 'Parent')),
-                );
-              },
-              child: const Text("I'm a Parent"),
-            ),
-            const SizedBox(height: 10),
-
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => AuthPage(role: 'Staff')),
-                );
-              },
-              child: const Text("I'm a Staff Member"),
-            ),
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color(0xFF1A2A3A),
+              Color(0xFF2F4F6F),
             ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    Icons.vaccines,
+                    size: 80,
+                    color: Colors.white,
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    "Welcome to VacSh!",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 10),
+                  const Text(
+                    "Select your role",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white70,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 40),
+
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => AuthPage(role: 'Parent')),
+                      );
+                    },
+                    icon: const Icon(Icons.family_restroom),
+                    label: const Text("I'm a Parent"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black87,
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => AuthPage(role: 'Staff')),
+                      );
+                    },
+                    icon: const Icon(Icons.medical_services),
+                    label: const Text("I'm a Staff Member"),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF1A2A3A),
+                      foregroundColor: Colors.white,
+                      minimumSize: const Size(double.infinity, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                      ),
+                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );

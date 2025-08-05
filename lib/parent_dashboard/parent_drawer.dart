@@ -14,60 +14,80 @@ class ParentDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.white,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            width: double.infinity,
-            color: Colors.blue,
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 40),
-            child: Row(
-              children: [
-                const CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person, color: Colors.blue),
-                ),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Text(
-                    "Welcome,\n$email",
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 16,
-                      height: 1.3,
+      child: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Icon(Icons.account_circle, size: 64, color: Colors.white),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Text(
+                      "Welcome,\n$email",
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        height: 1.3,
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          const SizedBox(height: 8),
-          _buildTile(Icons.home, 'Home', () => onItemSelected(0)),
-          _buildTile(Icons.calendar_month, 'Appointments', () => onItemSelected(1)),
-          _buildTile(Icons.child_care, 'Child Profile', () => onItemSelected(2)),
-          _buildTile(Icons.timeline, 'Vaccine Timeline', () => onItemSelected(3)),
-          _buildTile(Icons.help_outline, 'FAQs', () => onItemSelected(4)),
-          _buildTile(Icons.medical_information, 'More About Vaccines', () => onItemSelected(5)),
-          _buildTile(Icons.announcement, 'Announcements', () => onItemSelected(6)),
-          const Spacer(),
-          const Divider(),
-          _buildTile(
-            Icons.logout,
-            'Logout',
-            () {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => const RoleSelection()),
-                (route) => false,
-              );
-            },
-            iconColor: Colors.red,
-            textColor: Colors.red,
-          ),
-          const SizedBox(height: 8),
-        ],
+            const Divider(color: Colors.white24, thickness: 0.4),
+
+            _buildDrawerItem(Icons.home, 'Home', 0),
+            _buildDrawerItem(Icons.calendar_month, 'Appointments', 1),
+            _buildDrawerItem(Icons.child_care, 'Child Profile', 2),
+            _buildDrawerItem(Icons.timeline, 'Vaccine Timeline', 3),
+            _buildDrawerItem(Icons.help_outline, 'FAQs', 4),
+            _buildDrawerItem(Icons.medical_information, 'More About Vaccines', 5),
+            _buildDrawerItem(Icons.announcement, 'Announcements', 6),
+
+            const Divider(color: Colors.white24, thickness: 0.4),
+
+            ListTile(
+              leading: const Icon(Icons.logout, color: Colors.white),
+              title: const Text(
+                'Logout',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ),
+              onTap: () {
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (_) => const RoleSelection()),
+                  (route) => false,
+                );
+              },
+            ),
+          ],
+        ),
       ),
+    );
+  }
+
+  Widget _buildDrawerItem(IconData icon, String title, int index) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.white),
+      title: Text(
+        title,
+        style: const TextStyle(color: Colors.white),
+      ),
+      onTap: () => onItemSelected(index),
     );
   }
 
