@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
 
 class Appointments extends StatefulWidget {
   final String email;
@@ -42,14 +43,14 @@ class _AppointmentsState extends State<Appointments> {
         selectedDate == null ||
         selectedTime == null) {
       setState(() {
-        message = "Please fill all fields.";
+        message = "⚠️ Please fill all fields.";
       });
       return;
     }
 
     setState(() {
       message =
-          "Appointment for ${vaccineController.text} set on ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} at ${selectedTime!.format(context)}.";
+          "✅ Appointment for '${vaccineController.text}' set on ${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year} at ${selectedTime!.format(context)}.";
       vaccineController.clear();
       selectedDate = null;
       selectedTime = null;
@@ -58,8 +59,9 @@ class _AppointmentsState extends State<Appointments> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+   return BackToHomeWrapper(
+  email: widget.email, 
+  child:Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
@@ -71,10 +73,7 @@ class _AppointmentsState extends State<Appointments> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
-                ),
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                 child: Row(
                   children: [
                     IconButton(

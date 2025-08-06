@@ -47,7 +47,6 @@ class FAQs extends StatelessWidget {
         ),
         child: SafeArea(
           child: BackToHomeWrapper(
-            title: "FAQs",
             email: email,
             child: Expanded(
               child: PageView.builder(

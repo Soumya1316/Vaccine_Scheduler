@@ -48,16 +48,28 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
       year: 2026,
       color: Colors.green.shade100,
       vaccines: [
-        Vaccine(name: 'Measles, Mumps, Rubella (MMR)'),
+        Vaccine(name: 'MMR (Measles, Mumps, Rubella)'),
         Vaccine(name: 'Varicella (Chickenpox)'),
       ],
     ),
   ];
 
+  Color getYearColor(int year) {
+    switch (year) {
+      case 2024:
+        return Colors.blue.shade50;
+      case 2025:
+        return Colors.green.shade50;
+      case 2026:
+        return Colors.purple.shade50;
+      default:
+        return Colors.grey.shade100;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return BackToHomeWrapper(
-      title: "Vaccine Timeline",
       email: widget.email,
       child: Container(
         decoration: const BoxDecoration(
