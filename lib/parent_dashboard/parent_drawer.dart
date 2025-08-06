@@ -91,19 +91,6 @@ class ParentDrawer extends StatelessWidget {
     );
   }
 
-  Widget _buildTile(IconData icon, String label, VoidCallback onTap,
-      {Color iconColor = Colors.black87, Color textColor = Colors.black87}) {
-    return ListTile(
-      leading: Icon(icon, color: iconColor),
-      title: Text(
-        label,
-        style: TextStyle(
-          fontSize: 15,
-          color: textColor,
-        ),
-      ),
-      onTap: onTap,
-    );
-  }
+  
 }
 
