@@ -39,7 +39,8 @@ class MoreAboutVaccines extends StatelessWidget {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [ Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -81,7 +82,7 @@ class MoreAboutVaccines extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w600,
-                                color: Color(0xFF334D3C),
+                                color:  const Color.fromARGB(255, 10, 144, 131),
                                 height: 1.5,
                               ),
                             ),
@@ -89,7 +90,7 @@ class MoreAboutVaccines extends StatelessWidget {
                             Container(
                               height: 2,
                               width: 60,
-                              color: Colors.teal,
+                              color:  const Color.fromARGB(255, 10, 144, 131),
                             ),
                           ],
                         ),

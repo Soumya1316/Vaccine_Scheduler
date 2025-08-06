@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'login.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class SignUp extends StatefulWidget {
   final String role;
@@ -15,24 +18,40 @@ class _SignUpState extends State<SignUp> {
   final passwordController = TextEditingController();
   String message = '';
 
-  void signUp() {
-    final email = emailController.text.trim();
-    final password = passwordController.text;
+  void signUp() async {
+  final email = emailController.text.trim();
+  final password = passwordController.text;
 
-    if (fakeUserDB.containsKey(email)) {
-      setState(() {
+  try {
+    // Create user with Firebase Auth
+    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    // Store user role in Firestore
+    await FirebaseFirestore.instance.collection('users').doc(email).set({
+      'email': email,
+      'role': widget.role.toLowerCase(),
+    });
+
+    setState(() {
+      message = "Account created! You can now login.";
+    });
+  } on FirebaseAuthException catch (e) {
+    setState(() {
+      if (e.code == 'email-already-in-use') {
         message = "User already exists!";
-      });
-    } else {
-      fakeUserDB[email] = {
-        'password': password,
-        'role': widget.role.toLowerCase(),
-      };
-      setState(() {
-        message = "Account created! You can now login.";
-      });
-    }
+      } else if (e.code == 'invalid-email') {
+        message = "Invalid email format.";
+      } else if (e.code == 'weak-password') {
+        message = "Password is too weak.";
+      } else {
+        message = "Signup failed: ${e.message}";
+      }
+    });
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +60,8 @@ class _SignUpState extends State<SignUp> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF1A2A3A),
-              Color(0xFF2F4F6F),
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -100,7 +119,7 @@ class _SignUpState extends State<SignUp> {
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF1A2A3A),
+                            color: Color.fromARGB(255, 5, 57, 110),
                           ),
                         ),
                       ),
@@ -145,7 +164,7 @@ class _SignUpState extends State<SignUp> {
                       ElevatedButton(
                         onPressed: signUp,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF1A2A3A),
+                          backgroundColor: Color.fromARGB(255, 6, 76, 146),
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
@@ -192,7 +211,7 @@ class _SignUpState extends State<SignUp> {
                       // Bottom divider line
                       const Divider(
                         thickness: 1,
-                        color: Colors.black12,
+                        color:  Color.fromARGB(255, 6, 76, 146),
                       )
                     ],
                   ),

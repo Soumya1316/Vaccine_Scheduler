@@ -29,7 +29,7 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
   List<Year> vaccineData = [
     Year(
       year: 2024,
-      color: Colors.deepPurple.shade100,
+      color: const Color.fromARGB(255, 219, 232, 246),
       vaccines: [
         Vaccine(name: 'Flu Vaccine'),
         Vaccine(name: 'COVID-19 Booster'),
@@ -38,7 +38,7 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
     ),
     Year(
       year: 2025,
-      color: Colors.blue.shade100,
+      color: const Color.fromARGB(255, 219, 232, 246),
       vaccines: [
         Vaccine(name: 'Tetanus Shot'),
         Vaccine(name: 'Polio'),
@@ -46,7 +46,7 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
     ),
     Year(
       year: 2026,
-      color: Colors.green.shade100,
+      color:  const Color.fromARGB(255, 219, 232, 246),
       vaccines: [
         Vaccine(name: 'MMR (Measles, Mumps, Rubella)'),
         Vaccine(name: 'Varicella (Chickenpox)'),
@@ -57,11 +57,11 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
   Color getYearColor(int year) {
     switch (year) {
       case 2024:
-        return Colors.blue.shade50;
+        return  const Color.fromARGB(255, 240, 242, 243);
       case 2025:
-        return Colors.green.shade50;
+        return  const Color.fromARGB(255, 238, 241, 243);
       case 2026:
-        return Colors.purple.shade50;
+        return const Color.fromARGB(255, 242, 243, 245);
       default:
         return Colors.grey.shade100;
     }
@@ -75,7 +75,8 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [  Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -106,7 +107,7 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
                     children: [
                       const Icon(
                         Icons.calendar_month_rounded,
-                        color: Colors.black87,
+                        color: Color.fromARGB(255, 6, 76, 146),
                       ),
                       const SizedBox(width: 8),
                       Text(
@@ -114,7 +115,7 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
-                          color: Color(0xFF1A2A3A),
+                          color: Color.fromARGB(255, 5, 57, 110),
                         ),
                       ),
                     ],
@@ -125,7 +126,7 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
                     return ListTile(
                       leading: Icon(
                         Icons.vaccines,
-                        color: vaccine.completed ? Colors.teal : Colors.grey,
+                        color: vaccine.completed ? const Color.fromARGB(255, 134, 137, 136) : const Color.fromARGB(255, 10, 144, 131),
                       ),
                       title: Text(
                         vaccine.name,
@@ -141,7 +142,7 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
                           vaccine.completed
                               ? Icons.check_circle
                               : Icons.cancel_outlined,
-                          color: vaccine.completed ? Colors.teal : Colors.grey,
+                          color: vaccine.completed ? const Color.fromARGB(255, 10, 144, 131) : const Color.fromARGB(255, 134, 137, 136),
                         ),
                         onPressed: () {
                           setState(() {

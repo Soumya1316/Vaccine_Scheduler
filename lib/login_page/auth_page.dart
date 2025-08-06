@@ -31,8 +31,8 @@ class AuthPage extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF1A2A3A),
-              Color(0xFF2F4F6F),
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -62,7 +62,7 @@ class AuthPage extends StatelessWidget {
                         style: const TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Color.fromARGB(255, 5, 57, 110),
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -70,7 +70,7 @@ class AuthPage extends StatelessWidget {
                         "Welcome, $capitalizedRole!",
                         style: const TextStyle(
                           fontSize: 18,
-                          color: Colors.white70,
+                          color: Color.fromARGB(255, 5, 57, 110),
                         ),
                       ),
                     ],
@@ -90,7 +90,7 @@ class AuthPage extends StatelessWidget {
                       icon: const Icon(Icons.login),
                       label: const Text("Sign In"),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF102840),
+                        backgroundColor: Color.fromARGB(255, 6, 76, 146),
                         foregroundColor: Colors.white,
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
@@ -109,7 +109,7 @@ class AuthPage extends StatelessWidget {
                       label: const Text("Sign Up"),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.white,
-                        foregroundColor: const Color(0xFF102840),
+                        foregroundColor: Color.fromARGB(255, 6, 76, 146),
                         padding: const EdgeInsets.symmetric(vertical: 16),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),

@@ -77,7 +77,8 @@ class _ChildProfileState extends State<ChildProfile> {
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [ Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

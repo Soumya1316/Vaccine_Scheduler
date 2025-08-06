@@ -9,11 +9,11 @@ class AnnouncementList extends StatelessWidget {
 
   Color _getCardColor(int index) {
     final colors = [
-      Colors.pink.shade100,
-      Colors.orange.shade100,
-      Colors.green.shade100,
-      Colors.blue.shade100,
-      Colors.purple.shade100,
+      const Color.fromARGB(255, 187, 226, 248),
+      const Color.fromARGB(255, 158, 213, 250),
+      const Color.fromARGB(255, 137, 250, 248),
+      const Color.fromARGB(255, 117, 142, 244),
+      const Color.fromARGB(255, 147, 226, 240),
     ];
     return colors[index % colors.length];
   }
@@ -25,7 +25,8 @@ class AnnouncementList extends StatelessWidget {
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [ Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155)],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -64,14 +65,14 @@ class AnnouncementList extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Icon(Icons.announcement_rounded,
-                                    size: 40, color: Colors.black87),
+                                    size: 40, color: Color.fromARGB(255, 6, 76, 146)),
                                 const SizedBox(height: 16),
                                 Text(
                                   a.title,
                                   style: const TextStyle(
                                     fontSize: 22,
                                     fontWeight: FontWeight.bold,
-                                    color: Color(0xFF1A2A3A),
+                                    color: Color.fromARGB(255, 5, 57, 110),
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -80,7 +81,7 @@ class AnnouncementList extends StatelessWidget {
                                   a.description,
                                   style: const TextStyle(
                                     fontSize: 16,
-                                    color: Colors.black87,
+                                    color: Color.fromARGB(255, 6, 76, 146),
                                   ),
                                   textAlign: TextAlign.center,
                                 ),
@@ -88,7 +89,7 @@ class AnnouncementList extends StatelessWidget {
                                 Text(
                                   "Posted on: ${a.date.day}/${a.date.month}/${a.date.year}",
                                   style: const TextStyle(
-                                    color: Colors.black54,
+                                    color: Color.fromARGB(255, 6, 76, 146),
                                     fontStyle: FontStyle.italic,
                                   ),
                                 ),

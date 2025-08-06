@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'signup.dart';
 import 'package:vaccine_scheduler/parent_dashboard/pdashboard.dart';
 import 'package:vaccine_scheduler/staff_dashboard/sdashboard.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 Map<String, Map<String, String>> fakeUserDB = {};
 
@@ -18,31 +21,65 @@ class _LoginPageState extends State<LoginPage> {
   final passwordController = TextEditingController();
   String message = '';
 
-  void login() {
-    final email = emailController.text.trim();
-    final password = passwordController.text;
+void login() async {
+  final email = emailController.text.trim();
+  final password = passwordController.text;
 
-    if (fakeUserDB.containsKey(email) &&
-        fakeUserDB[email]!['password'] == password) {
-      String role = fakeUserDB[email]!['role'] ?? 'Parent';
+  try {
+    // Sign in with Firebase Auth
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
 
-      if (role.toLowerCase() == 'parent') {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => ParentDashboard(email: email)),
-        );
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (_) => StaffDashboard(email: email)),
-        );
-      }
-    } else {
+    // Fetch user role from Firestore
+    final doc = await FirebaseFirestore.instance.collection('users').doc(email).get();
+
+    if (!doc.exists) {
       setState(() {
-        message = "Invalid email or password!";
+        message = "No user record found!";
       });
+      return;
     }
+
+    final storedRole = doc['role'];
+
+    if (storedRole != widget.role.toLowerCase()) {
+      setState(() {
+        message = "Role mismatch! You are not registered as ${widget.role}.";
+      });
+      return;
+    }
+
+    setState(() {
+      message = "Login successful!";
+    });
+
+    // Navigate to appropriate dashboard
+    if (storedRole == 'parent') {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => ParentDashboard(email: email)),
+      );
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => StaffDashboard(email: email)),
+      );
+    }
+
+  } on FirebaseAuthException catch (e) {
+    setState(() {
+      if (e.code == 'user-not-found') {
+        message = "No user found with this email.";
+      } else if (e.code == 'wrong-password') {
+        message = "Incorrect password.";
+      } else {
+        message = "Login failed: ${e.message}";
+      }
+    });
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +88,8 @@ class _LoginPageState extends State<LoginPage> {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF1A2A3A),
-              Color(0xFF2F4F6F),
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -107,7 +144,7 @@ Expanded(
             style: TextStyle(
               fontSize: 28,
               fontWeight: FontWeight.bold,
-              color: Color(0xFF1A2A3A),
+              color: Color.fromARGB(255, 5, 57, 110),
             ),
           ),
         ),
@@ -149,7 +186,7 @@ Expanded(
         ElevatedButton(
           onPressed: login,
           style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(0xFF1A2A3A),
+            backgroundColor: Color.fromARGB(255, 6, 76, 146),
             foregroundColor: Colors.white,
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
@@ -193,7 +230,7 @@ Expanded(
 
         const Divider(
           thickness: 1,
-          color: Colors.black12,
+          color: Color.fromARGB(255, 6, 76, 146),
         )
       ],
     ),

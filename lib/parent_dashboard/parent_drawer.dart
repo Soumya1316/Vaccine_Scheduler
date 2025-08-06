@@ -17,7 +17,8 @@ class ParentDrawer extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [ Color.fromARGB(255, 5, 55, 106),
+              Color.fromARGB(255, 6, 123, 106),],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),

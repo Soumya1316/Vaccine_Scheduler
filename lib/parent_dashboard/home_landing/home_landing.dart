@@ -12,7 +12,8 @@ class ParentHomeLanding extends StatelessWidget {
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [ Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -38,7 +39,7 @@ class ParentHomeLanding extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       boxShadow: const [
                         BoxShadow(
-                          color: Colors.black26,
+                          color: Color.fromARGB(255, 6, 76, 146),
                           blurRadius: 10,
                           offset: Offset(0, 4),
                         )
@@ -52,7 +53,7 @@ class ParentHomeLanding extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF1A2A3A),
+                            color: Color.fromARGB(255, 5, 57, 110),
                           ),
                         ),
                         const SizedBox(height: 10),
@@ -75,5 +76,6 @@ class ParentHomeLanding extends StatelessWidget {
       ),
     );
   }
+}
 
 
