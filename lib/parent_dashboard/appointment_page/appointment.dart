@@ -38,7 +38,9 @@ class _AppointmentsState extends State<Appointments> {
   }
 
   void _submitAppointment() {
-    if (vaccineController.text.isEmpty || selectedDate == null || selectedTime == null) {
+    if (vaccineController.text.isEmpty ||
+        selectedDate == null ||
+        selectedTime == null) {
       setState(() {
         message = "Please fill all fields.";
       });
@@ -69,7 +71,10 @@ class _AppointmentsState extends State<Appointments> {
           child: Column(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 10,
+                ),
                 child: Row(
                   children: [
                     IconButton(
