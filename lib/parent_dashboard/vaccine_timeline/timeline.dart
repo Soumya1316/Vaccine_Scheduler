@@ -70,7 +70,6 @@ class _VaccineTimelineState extends State<VaccineTimeline> {
   @override
   Widget build(BuildContext context) {
     return BackToHomeWrapper(
-      title: "Vaccine Timeline",
       email: widget.email,
       child: Container(
         decoration: const BoxDecoration(

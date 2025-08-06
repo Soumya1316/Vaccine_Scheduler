@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
 
 class ParentHomeLanding extends StatelessWidget {
   final String email;
@@ -7,8 +8,10 @@ class ParentHomeLanding extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+
+    return BackToHomeWrapper(
+  email: email, 
+  child:Container(
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(

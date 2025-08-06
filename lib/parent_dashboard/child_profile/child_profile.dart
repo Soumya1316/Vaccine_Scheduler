@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.dart';
 
 class ChildProfile extends StatefulWidget {
   final String email;
@@ -71,8 +72,9 @@ class _ChildProfileState extends State<ChildProfile> {
     final labelStyle =
         const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 
-    return Scaffold(
-      body: Container(
+     return BackToHomeWrapper(
+        email: widget.email, 
+        child:Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
@@ -89,10 +91,7 @@ class _ChildProfileState extends State<ChildProfile> {
                 left: 10,
                 child: Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () => Navigator.pop(context),
-                    ),
+                
                     const SizedBox(width: 8),
                     const Text(
                       "Back",

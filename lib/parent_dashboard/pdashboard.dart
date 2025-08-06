@@ -65,18 +65,9 @@ class _ParentDashboardState extends State<ParentDashboard> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
                 child: Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
                     const SizedBox(width: 4),
-                    const Text(
-                      "Back",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    const Spacer(),
+                   
+              //const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.menu, color: Colors.white),
                       onPressed: () {
