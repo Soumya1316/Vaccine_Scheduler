@@ -4,10 +4,9 @@ import 'appointment_page/appointment.dart';
 import 'package:vaccine_scheduler/parent_dashboard/child_profile/child_profile.dart';
 import 'package:vaccine_scheduler/parent_dashboard/moreaboutvaccines.dart';
 import 'package:vaccine_scheduler/parent_dashboard/vaccine_timeline/timeline.dart';
-import 'package:vaccine_scheduler/parent_dashboard/home_landing/home_landing.dart';
 import 'package:vaccine_scheduler/parent_dashboard/faqs.dart';
 import 'package:vaccine_scheduler/parent_dashboard/parent_drawer.dart';
-
+import 'package:vaccine_scheduler/parent_dashboard/home_landing/home_landing.dart';
 class ParentDashboard extends StatefulWidget {
   final String email;
 
@@ -67,18 +66,9 @@ class _ParentDashboardState extends State<ParentDashboard> {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8),
                 child: Row(
                   children: [
-                    IconButton(
-                      icon: const Icon(Icons.arrow_back, color: Colors.white),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
                     const SizedBox(width: 4),
-                    const Text(
-                      "Back",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                    const Spacer(),
+                   
+              //const Spacer(),
                     IconButton(
                       icon: const Icon(Icons.menu, color: Colors.white),
                       onPressed: () {
@@ -98,3 +88,4 @@ class _ParentDashboardState extends State<ParentDashboard> {
     );
   }
 }
+

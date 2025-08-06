@@ -38,7 +38,9 @@ class _AppointmentsState extends State<Appointments> {
   }
 
   void _submitAppointment() {
-    if (vaccineController.text.isEmpty || selectedDate == null || selectedTime == null) {
+    if (vaccineController.text.isEmpty ||
+        selectedDate == null ||
+        selectedTime == null) {
       setState(() {
         message = "⚠️ Please fill all fields.";
       });
@@ -199,7 +201,6 @@ class _AppointmentsState extends State<Appointments> {
                 ),
               ),
             ],
-
           ),
         ),
       ),

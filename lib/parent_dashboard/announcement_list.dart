@@ -33,7 +33,6 @@ class AnnouncementList extends StatelessWidget {
         ),
         child: SafeArea(
           child: BackToHomeWrapper(
-            title: "Announcements",
             email: email,
             child: announcements.isEmpty
                 ? const Center(
@@ -106,3 +105,4 @@ class AnnouncementList extends StatelessWidget {
     );
   }
 }
+

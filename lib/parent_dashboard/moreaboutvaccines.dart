@@ -47,7 +47,6 @@ class MoreAboutVaccines extends StatelessWidget {
         ),
         child: SafeArea(
           child: BackToHomeWrapper(
-            title: "More About Vaccines",
             email: email,
             child: Expanded(
               child: PageView.builder(
