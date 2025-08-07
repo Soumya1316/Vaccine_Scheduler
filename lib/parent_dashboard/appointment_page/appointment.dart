@@ -39,7 +39,9 @@ class _AppointmentsState extends State<Appointments> {
   }
 
   void _submitAppointment() {
-    if (vaccineController.text.isEmpty || selectedDate == null || selectedTime == null) {
+    if (vaccineController.text.isEmpty ||
+        selectedDate == null ||
+        selectedTime == null) {
       setState(() {
         message = "⚠️ Please fill all fields.";
       });
@@ -57,12 +59,13 @@ class _AppointmentsState extends State<Appointments> {
 
   @override
   Widget build(BuildContext context) {
-   return BackToHomeWrapper(
-  email: widget.email, 
-  child:Container(
+    return BackToHomeWrapper(
+      email: widget.email,
+      child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [ Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -70,7 +73,6 @@ class _AppointmentsState extends State<Appointments> {
         child: SafeArea(
           child: Column(
             children: [
-
               const Spacer(),
 
               Expanded(
@@ -94,7 +96,7 @@ class _AppointmentsState extends State<Appointments> {
                           style: TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
-                            color: Color(0xFF1A2A3A),
+                            color: Color.fromARGB(255, 5, 57, 110),
                           ),
                         ),
                       ),
@@ -129,7 +131,7 @@ class _AppointmentsState extends State<Appointments> {
                                   : "${selectedDate!.day}/${selectedDate!.month}/${selectedDate!.year}",
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF1A2A3A),
+                              backgroundColor: Color.fromARGB(255, 5, 60, 116),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
@@ -147,7 +149,7 @@ class _AppointmentsState extends State<Appointments> {
                                   : selectedTime!.format(context),
                             ),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2F4F6F),
+                              backgroundColor: Color.fromARGB(255, 6, 76, 146),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
@@ -161,7 +163,7 @@ class _AppointmentsState extends State<Appointments> {
                             icon: const Icon(Icons.check_circle),
                             label: const Text("Submit Appointment"),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.teal,
+                              backgroundColor: const Color.fromARGB(255, 10, 144, 131),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
@@ -179,7 +181,7 @@ class _AppointmentsState extends State<Appointments> {
                           child: Text(
                             message,
                             style: const TextStyle(
-                              color: Colors.teal,
+                              color:  const Color.fromARGB(255, 10, 144, 131),
                               fontSize: 16,
                             ),
                           ),

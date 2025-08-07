@@ -36,18 +36,18 @@ class FAQs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
+    return BackToHomeWrapper(
+      email: email,
+      child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
         child: SafeArea(
-          child: BackToHomeWrapper(
-            email: email,
             child: Expanded(
               child: PageView.builder(
                 itemCount: faqs.length,
@@ -79,14 +79,14 @@ class FAQs extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF2F4F6F),
+                                color: Color.fromARGB(255, 5, 57, 110),
                               ),
                             ),
                             const SizedBox(height: 16),
                             Container(
                               height: 2,
                               width: 60,
-                              color: Colors.tealAccent,
+                              color:  const Color.fromARGB(255, 10, 144, 131),
                             ),
                             const SizedBox(height: 16),
                             Text(
@@ -108,7 +108,6 @@ class FAQs extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

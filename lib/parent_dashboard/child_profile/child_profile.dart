@@ -5,6 +5,7 @@ import 'package:vaccine_scheduler/parent_dashboard/widgets/back_to_home_wrapper.
 
 class ChildProfile extends StatefulWidget {
   final String email;
+
   const ChildProfile({super.key, required this.email});
 
   @override
@@ -69,6 +70,7 @@ class _ChildProfileState extends State<ChildProfile> {
 
   @override
   Widget build(BuildContext context) {
+
     final labelStyle =
         const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
 
@@ -77,7 +79,8 @@ class _ChildProfileState extends State<ChildProfile> {
         child:Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xFF1A2A3A), Color(0xFF2F4F6F)],
+            colors: [ Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -85,21 +88,6 @@ class _ChildProfileState extends State<ChildProfile> {
         child: SafeArea(
           child: Stack(
             children: [
-              // Top bar
-              Positioned(
-                top: 10,
-                left: 10,
-                child: Row(
-                  children: [
-                
-                    const SizedBox(width: 8),
-                    const Text(
-                      "Back",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    )
-                  ],
-                ),
-              ),
 
               Positioned(
                 top: MediaQuery.of(context).size.height * 0.25,

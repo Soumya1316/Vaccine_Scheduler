@@ -13,8 +13,8 @@ class RoleSelection extends StatelessWidget {
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color(0xFF1A2A3A),
-              Color(0xFF2F4F6F),
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -38,7 +38,7 @@ class RoleSelection extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Color.fromARGB(255, 5, 57, 110),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -48,7 +48,7 @@ class RoleSelection extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white70,
+                      color: Color.fromARGB(255, 5, 57, 110),
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -65,7 +65,7 @@ class RoleSelection extends StatelessWidget {
                     label: const Text("I'm a Parent"),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
-                      foregroundColor: Colors.black87,
+                      foregroundColor: Color.fromARGB(255, 6, 76, 146),
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(14),
@@ -85,7 +85,7 @@ class RoleSelection extends StatelessWidget {
                     icon: const Icon(Icons.medical_services),
                     label: const Text("I'm a Staff Member"),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1A2A3A),
+                      backgroundColor: Color.fromARGB(255, 6, 76, 146),
                       foregroundColor: Colors.white,
                       minimumSize: const Size(double.infinity, 50),
                       shape: RoundedRectangleBorder(
