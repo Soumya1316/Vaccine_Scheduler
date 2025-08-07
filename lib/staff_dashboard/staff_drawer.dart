@@ -19,7 +19,8 @@ class StaffDrawer extends StatelessWidget {
           DrawerHeader(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
-                colors: [Color(0xFF2979FF), Color(0xFF1565C0)],
+                colors: [ Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155)],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),

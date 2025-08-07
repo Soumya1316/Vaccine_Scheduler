@@ -39,41 +39,48 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 46, 100, 200),
-      body: SafeArea(
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                // Custom clean header
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Icon(Icons.announcement, color: Color.fromARGB(255, 125, 180, 235), size: 28),
-                    SizedBox(width: 8),
-                    Text(
-                      "Add Announcement",
-                      style: TextStyle(
-                        fontSize: 22,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 86, 171, 255),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Custom clean header
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(Icons.announcement, color: Color.fromARGB(255, 247, 248, 249), size: 28),
+                      SizedBox(width: 8),
+                      Text(
+                        "Add Announcement",
+                        style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          color: Color.fromARGB(255, 5, 57, 110),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-
-                // White Card container
-                Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                    ],
                   ),
-                  elevation: 6,
-                  color: Colors.white,
-                  child: Padding(
+                  const SizedBox(height: 24),
+
+                  // Replaced Card with Container (no box, no shadow)
+                  Container(
                     padding: const EdgeInsets.all(20.0),
+                    // Optional: you can add color here if you want a background
+                    // color: Colors.white,
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -83,7 +90,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
-                            color: Color.fromARGB(255, 0, 107, 215),
+                            color: Color.fromARGB(255, 5, 57, 110),
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -94,7 +101,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           decoration: InputDecoration(
                             labelText: "Title",
                             filled: true,
-                            fillColor: const Color.fromARGB(255, 77, 148, 255),
+                            fillColor: const Color.fromARGB(255, 240, 242, 243),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -108,7 +115,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           decoration: InputDecoration(
                             labelText: "Description",
                             filled: true,
-                            fillColor: const Color.fromARGB(255, 3, 82, 202),
+                            fillColor: const Color.fromARGB(255, 240, 242, 243),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
@@ -121,7 +128,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           icon: const Icon(Icons.send),
                           label: const Text("Submit"),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 108, 213, 203),
+                            backgroundColor: const Color.fromARGB(255, 240, 242, 243),
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             textStyle: const TextStyle(fontSize: 16),
@@ -144,8 +151,8 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                       ],
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

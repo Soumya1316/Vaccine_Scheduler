@@ -8,13 +8,25 @@ class StaffHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 206, 242, 255),
-      appBar: AppBar(
+        appBar: AppBar(
         title: const Text('STAFF DASHBOARD'),
-        backgroundColor: const Color.fromARGB(255, 129, 177, 199),
+        backgroundColor: Color.fromARGB(255, 5, 57, 110),
         centerTitle: true,
       ),
-      body: Center(
+       body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+      child: Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
@@ -39,7 +51,7 @@ class StaffHome extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF29559E),
+                        color: Color.fromARGB(255, 5, 57, 110),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -48,7 +60,7 @@ class StaffHome extends StatelessWidget {
                       email,
                       style: const TextStyle(
                         fontSize: 18,
-                        color: Colors.black87,
+                        color:  Color.fromARGB(255, 6, 76, 146),
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -68,6 +80,7 @@ class StaffHome extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }

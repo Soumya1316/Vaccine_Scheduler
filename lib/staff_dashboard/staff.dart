@@ -103,7 +103,7 @@ class _SdPageState extends State<SdPage> {
               ElevatedButton(
                 onPressed: _addVaccine,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.teal,
+                  backgroundColor: const Color.fromARGB(255, 10, 144, 131),
                   padding:
                       const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
                   shape: RoundedRectangleBorder(
@@ -142,7 +142,7 @@ class _SdPageState extends State<SdPage> {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF2F4F6F),
+                    color: Color.fromARGB(255, 5, 57, 110),
                   ),
                 ),
                 Row(
@@ -188,57 +188,71 @@ class _SdPageState extends State<SdPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F6FA),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const SizedBox(height: 25),
-            Text(
-              "Welcome ${widget.email}",
-              style: const TextStyle(
-                fontSize: 18,
-                color: Colors.black87,
-              ),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              "Staff Vaccine Dashboard",
-              style: TextStyle(
-                fontSize: 26,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF2F4F6F),
-              ),
-            ),
-            const SizedBox(height: 15),
-            ElevatedButton.icon(
-              icon: const Icon(Icons.add, size: 20),
-              label: const Text("Create New Vaccine Entry"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.teal[600],
-                foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+      backgroundColor: Colors.transparent,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            children: [
+              const SizedBox(height: 25),
+              Text(
+                "Welcome ${widget.email}",
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.black87,
                 ),
               ),
-              onPressed: _showAddVaccineForm,
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.transparent,
-                ),
-                child: ListView.builder(
-                  itemCount: vaccines.length,
-                  itemBuilder: (context, index) {
-                    return _buildVaccineCard(vaccines[index], index);
-                  },
+              const SizedBox(height: 8),
+              const Text(
+                "Staff Vaccine Dashboard",
+                style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 5, 57, 110),
                 ),
               ),
-            ),
-          ],
+              const SizedBox(height: 15),
+              ElevatedButton.icon(
+                icon: const Icon(Icons.add, size: 20),
+                label: const Text("Create New Vaccine Entry"),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 10, 144, 131),
+                  foregroundColor: Colors.white,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: _showAddVaccineForm,
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.transparent,
+                  ),
+                  child: ListView.builder(
+                    itemCount: vaccines.length,
+                    itemBuilder: (context, index) {
+                      return _buildVaccineCard(vaccines[index], index);
+                    },
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
