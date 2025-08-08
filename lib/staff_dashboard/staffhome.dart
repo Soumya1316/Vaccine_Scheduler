@@ -10,7 +10,7 @@ class StaffHome extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
         title: const Text('STAFF DASHBOARD'),
-        backgroundColor: Color.fromARGB(255, 5, 57, 110),
+        backgroundColor:  Color.fromARGB(255, 6, 76, 146),
         centerTitle: true,
       ),
        body: Container(

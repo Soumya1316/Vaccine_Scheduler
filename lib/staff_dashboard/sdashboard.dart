@@ -32,7 +32,7 @@ class _StaffDashboardState extends State<StaffDashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF1F6FA),
+      backgroundColor: const Color.fromARGB(255, 240, 242, 243),
       appBar: AppBar(
         title: Text(
           _titles[_selectedIndex],
@@ -42,7 +42,7 @@ class _StaffDashboardState extends State<StaffDashboard> {
             letterSpacing: 0.5,
           ),
         ),
-        backgroundColor: const Color(0xFF2F4F6F),
+        backgroundColor: Color.fromARGB(255, 5, 57, 110),
         centerTitle: true,
         elevation: 2,
       ),

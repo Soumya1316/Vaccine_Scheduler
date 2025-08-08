@@ -129,7 +129,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           label: const Text("Submit"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color.fromARGB(255, 240, 242, 243),
-                            foregroundColor: Colors.white,
+                            foregroundColor: Color.fromARGB(255, 5, 57, 110),
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             textStyle: const TextStyle(fontSize: 16),
                             shape: RoundedRectangleBorder(
