@@ -27,10 +27,22 @@ void login() async {
 
   try {
     // Sign in with Firebase Auth
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
+    UserCredential userCred = await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
+
+    // Check email verification
+    if (!userCred.user!.emailVerified) {
+      await userCred.user!.sendEmailVerification();
+
+      setState(() {
+        message = "Please verify your email. A new verification link has been sent.";
+      });
+
+      await FirebaseAuth.instance.signOut(); // prevent access
+      return;
+    }
 
     // Fetch user role from Firestore
     final doc = await FirebaseFirestore.instance.collection('users').doc(email).get();
@@ -48,6 +60,7 @@ void login() async {
       setState(() {
         message = "Role mismatch! You are not registered as ${widget.role}.";
       });
+      await FirebaseAuth.instance.signOut();
       return;
     }
 
@@ -55,7 +68,7 @@ void login() async {
       message = "Login successful!";
     });
 
-    // Navigate to appropriate dashboard
+    // Navigate to dashboard
     if (storedRole == 'parent') {
       Navigator.pushReplacement(
         context,

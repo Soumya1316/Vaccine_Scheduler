@@ -100,6 +100,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           controller: titleController,
                           decoration: InputDecoration(
                             labelText: "Title",
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             filled: true,
                             fillColor: const Color.fromARGB(255, 240, 242, 243),
                             border: OutlineInputBorder(
@@ -114,6 +115,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           maxLines: 4,
                           decoration: InputDecoration(
                             labelText: "Description",
+                            floatingLabelBehavior: FloatingLabelBehavior.never,
                             filled: true,
                             fillColor: const Color.fromARGB(255, 240, 242, 243),
                             border: OutlineInputBorder(
@@ -143,7 +145,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           message,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: message.contains('added') ? Colors.green : Colors.red,
+                            color: message.contains('added') ? const Color.fromARGB(255, 8, 211, 15) : const Color.fromARGB(255, 231, 21, 6),
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
                           ),

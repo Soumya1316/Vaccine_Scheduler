@@ -24,7 +24,7 @@ class _SignUpState extends State<SignUp> {
 
   try {
     // Create user with Firebase Auth
-    await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    UserCredential userCred = await FirebaseAuth.instance.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -35,9 +35,13 @@ class _SignUpState extends State<SignUp> {
       'role': widget.role.toLowerCase(),
     });
 
+    // Send verification email
+    await userCred.user?.sendEmailVerification();
+
     setState(() {
-      message = "Account created! You can now login.";
+      message = "Account created! Verification email sent. Please verify before logging in.";
     });
+
   } on FirebaseAuthException catch (e) {
     setState(() {
       if (e.code == 'email-already-in-use') {
