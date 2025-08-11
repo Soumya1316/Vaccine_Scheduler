@@ -35,72 +35,74 @@ class MoreAboutVaccines extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: double.infinity, // ensure full width
-        height: double.infinity, // ensure full height
+    return BackToHomeWrapper(
+      email: email,
+      child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
               Color.fromARGB(255, 8, 99, 190),
-              Color.fromARGB(255, 8, 181, 155)
+              Color.fromARGB(255, 8, 181, 155),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
         ),
         child: SafeArea(
-          child: BackToHomeWrapper(
-            email: email,
-            child: PageView.builder(
-              itemCount: vaccineInfo.length,
-              controller: PageController(viewportFraction: 0.9),
-              itemBuilder: (context, index) {
-                final info = vaccineInfo[index];
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 30,
-                    horizontal: 10,
-                  ),
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
-                    elevation: 8,
-                    color: Colors.white,
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            info["icon"]!,
-                            style: const TextStyle(fontSize: 40),
-                          ),
-                          const SizedBox(height: 16),
-                          Text(
-                            info["text"]!,
-                            textAlign: TextAlign.center,
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w600,
-                              color: Color.fromARGB(255, 10, 144, 131),
-                              height: 1.5,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          Container(
-                            height: 2,
-                            width: 60,
-                            color: Color.fromARGB(255, 10, 144, 131),
-                          ),
-                        ],
+          child: Column(
+            children: [
+              Expanded(
+                child: PageView.builder(
+                  itemCount: vaccineInfo.length,
+                  controller: PageController(viewportFraction: 0.9),
+                  itemBuilder: (context, index) {
+                    final info = vaccineInfo[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 30,
+                        horizontal: 10,
                       ),
-                    ),
-                  ),
-                );
-              },
-            ),
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        elevation: 8,
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                info["icon"]!,
+                                style: const TextStyle(fontSize: 40),
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                info["text"]!,
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w600,
+                                  color: Color.fromARGB(255, 10, 144, 131),
+                                  height: 1.5,
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Container(
+                                height: 2,
+                                width: 60,
+                                color: const Color.fromARGB(255, 10, 144, 131),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
         ),
       ),
