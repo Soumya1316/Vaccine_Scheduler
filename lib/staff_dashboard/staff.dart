@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vaccine_scheduler/staff_dashboard/widgets/back_to_staff.dart';
 
 class Vaccine {
   String name;
@@ -192,9 +193,9 @@ class _SdPageState extends State<SdPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Container(
+    return BackToStaffHomeWrapper(
+      email: widget.email,
+      child: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -243,14 +244,11 @@ class _SdPageState extends State<SdPage> {
               ),
               const SizedBox(height: 20),
               Expanded(
-                child: Container(
-                  decoration: const BoxDecoration(color: Colors.transparent),
-                  child: ListView.builder(
-                    itemCount: vaccines.length,
-                    itemBuilder: (context, index) {
-                      return _buildVaccineCard(vaccines[index], index);
-                    },
-                  ),
+                child: ListView.builder(
+                  itemCount: vaccines.length,
+                  itemBuilder: (context, index) {
+                    return _buildVaccineCard(vaccines[index], index);
+                  },
                 ),
               ),
             ],

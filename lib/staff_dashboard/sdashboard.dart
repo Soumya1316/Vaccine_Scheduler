@@ -22,7 +22,7 @@ class _StaffDashboardState extends State<StaffDashboard> {
     super.initState();
     _pages = [
       StaffHome(email: widget.email),
-      const AddAnnouncement(),
+      const AddAnnouncement(email: '',),
       SdPage(email: widget.email),
     ];
   }
