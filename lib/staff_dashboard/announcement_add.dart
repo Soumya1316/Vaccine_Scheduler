@@ -16,7 +16,7 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
   void _addAnnouncement() {
     if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
       setState(() {
-        message = "⚠️ Please fill all fields.";
+        message = "⚠ Please fill all fields.";
       });
       return;
     }
@@ -62,7 +62,11 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: const [
-                      Icon(Icons.announcement, color: Color.fromARGB(255, 247, 248, 249), size: 28),
+                      Icon(
+                        Icons.announcement,
+                        color: Color.fromARGB(255, 247, 248, 249),
+                        size: 28,
+                      ),
                       SizedBox(width: 8),
                       Text(
                         "Add Announcement",
@@ -130,7 +134,12 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           icon: const Icon(Icons.send),
                           label: const Text("Submit"),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(255, 240, 242, 243),
+                            backgroundColor: const Color.fromARGB(
+                              255,
+                              240,
+                              242,
+                              243,
+                            ),
                             foregroundColor: Color.fromARGB(255, 5, 57, 110),
                             padding: const EdgeInsets.symmetric(vertical: 14),
                             textStyle: const TextStyle(fontSize: 16),
@@ -145,7 +154,9 @@ class _AddAnnouncementState extends State<AddAnnouncement> {
                           message,
                           textAlign: TextAlign.center,
                           style: TextStyle(
-                            color: message.contains('added') ? const Color.fromARGB(255, 8, 211, 15) : const Color.fromARGB(255, 231, 21, 6),
+                            color: message.contains('added')
+                                ? const Color.fromARGB(255, 8, 211, 15)
+                                : const Color.fromARGB(255, 231, 21, 6),
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
                           ),

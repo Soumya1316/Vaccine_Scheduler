@@ -27,25 +27,16 @@ class _StaffDashboardState extends State<StaffDashboard> {
     ];
   }
 
-  final List<String> _titles = ["Staff Home", "Add Announcement", "Vaccine Stock"];
+  final List<String> _titles = [
+    "STAFF DASHBOARD",
+    "ADD ANNOUNCEMENT",
+    "VACCINE STOCK",
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 240, 242, 243),
-      appBar: AppBar(
-        title: Text(
-          _titles[_selectedIndex],
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-            letterSpacing: 0.5,
-          ),
-        ),
-        backgroundColor: Color.fromARGB(255, 5, 57, 110),
-        centerTitle: true,
-        elevation: 2,
-      ),
       drawer: StaffDrawer(
         email: widget.email,
         onItemSelected: (index) {
@@ -53,7 +44,37 @@ class _StaffDashboardState extends State<StaffDashboard> {
           Navigator.pop(context); // Close the drawer
         },
       ),
-      body: _pages[_selectedIndex],
+      body: Column(
+        children: [
+          // Custom top bar (instead of AppBar)
+          Container(
+            height: 56,
+            color: const Color.fromARGB(255, 6, 76, 146),
+            child: Row(
+              children: [
+                Builder(
+                  builder: (context) => IconButton(
+                    icon: const Icon(Icons.menu, color: Colors.white),
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  _titles[_selectedIndex],
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 20,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          // Main content
+          Expanded(child: _pages[_selectedIndex]),
+        ],
+      ),
     );
   }
 }

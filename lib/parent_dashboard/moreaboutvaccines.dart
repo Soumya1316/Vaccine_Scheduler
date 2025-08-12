@@ -8,28 +8,31 @@ class MoreAboutVaccines extends StatelessWidget {
 
   final List<Map<String, String>> vaccineInfo = const [
     {
-      "text": "Vaccines train your immune system to recognize and fight specific diseases.",
-      "icon": "🧠"
+      "text":
+          "Vaccines train your immune system to recognize and fight specific diseases.",
+      "icon": "🧠",
     },
     {
-      "text": "Most vaccines contain weakened or killed germs to stimulate immunity.",
-      "icon": "🦠"
+      "text":
+          "Most vaccines contain weakened or killed germs to stimulate immunity.",
+      "icon": "🦠",
     },
     {
       "text": "Common side effects: mild fever, soreness, and tiredness.",
-      "icon": "🌡️"
+      "icon": "🌡️",
     },
     {
       "text": "Vaccines are safe and tested extensively before public use.",
-      "icon": "✅"
+      "icon": "✅",
     },
     {
-      "text": "Staying updated with vaccines helps protect you and your community.",
-      "icon": "🛡️"
+      "text":
+          "Staying updated with vaccines helps protect you and your community.",
+      "icon": "🛡️",
     },
     {
       "text": "Some vaccines need boosters for long-lasting protection.",
-      "icon": "💉"
+      "icon": "💉",
     },
   ];
 

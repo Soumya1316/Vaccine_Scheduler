@@ -8,15 +8,18 @@ class StaffHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
+      /* appBar: AppBar(
+        /*title: const Text(
           'STAFF DASHBOARD',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Color.fromARGB(255, 249, 249, 249),
+          ),
+        ),*/
         backgroundColor: const Color.fromARGB(255, 6, 76, 146),
         centerTitle: true,
         elevation: 4,
-      ),
+      ),*/
       body: Stack(
         children: [
           // Gradient background
@@ -138,10 +141,7 @@ class StaffHome extends StatelessWidget {
     return Container(
       width: size,
       height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: color,
-      ),
+      decoration: BoxDecoration(shape: BoxShape.circle, color: color),
     );
   }
 }

@@ -64,8 +64,10 @@ class _AppointmentsState extends State<Appointments> {
       child: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [ Color.fromARGB(255, 8, 99, 190),
-              Color.fromARGB(255, 8, 181, 155),],
+            colors: [
+              Color.fromARGB(255, 8, 99, 190),
+              Color.fromARGB(255, 8, 181, 155),
+            ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
           ),
@@ -163,7 +165,12 @@ class _AppointmentsState extends State<Appointments> {
                             icon: const Icon(Icons.check_circle),
                             label: const Text("Submit Appointment"),
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color.fromARGB(255, 10, 144, 131),
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                10,
+                                144,
+                                131,
+                              ),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               shape: RoundedRectangleBorder(
@@ -181,7 +188,7 @@ class _AppointmentsState extends State<Appointments> {
                           child: Text(
                             message,
                             style: const TextStyle(
-                              color:  const Color.fromARGB(255, 10, 144, 131),
+                              color: Color.fromARGB(255, 10, 144, 131),
                               fontSize: 16,
                             ),
                           ),

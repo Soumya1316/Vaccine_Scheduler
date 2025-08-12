@@ -5,11 +5,7 @@ class Vaccine {
   String doseInfo;
   int quantity;
 
-  Vaccine({
-    required this.name,
-    required this.doseInfo,
-    this.quantity = 0,
-  });
+  Vaccine({required this.name, required this.doseInfo, this.quantity = 0});
 }
 
 class SdPage extends StatefulWidget {
@@ -96,16 +92,17 @@ class _SdPageState extends State<SdPage> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                validator: (value) =>
-                    value!.isEmpty ? "Enter dose info" : null,
+                validator: (value) => value!.isEmpty ? "Enter dose info" : null,
               ),
               const SizedBox(height: 15),
               ElevatedButton(
                 onPressed: _addVaccine,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 10, 144, 131),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 12,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -148,8 +145,11 @@ class _SdPageState extends State<SdPage> {
                 Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.remove_circle_outline,
-                          color: Colors.red, size: 26),
+                      icon: const Icon(
+                        Icons.remove_circle_outline,
+                        color: Colors.red,
+                        size: 26,
+                      ),
                       onPressed: () {
                         setState(() {
                           if (vaccine.quantity > 0) vaccine.quantity--;
@@ -159,11 +159,16 @@ class _SdPageState extends State<SdPage> {
                     Text(
                       "${vaccine.quantity}",
                       style: const TextStyle(
-                          fontSize: 18, fontWeight: FontWeight.w500),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                     IconButton(
-                      icon: const Icon(Icons.add_circle_outline,
-                          color: Colors.green, size: 26),
+                      icon: const Icon(
+                        Icons.add_circle_outline,
+                        color: Colors.green,
+                        size: 26,
+                      ),
                       onPressed: () {
                         setState(() {
                           vaccine.quantity++;
@@ -171,7 +176,7 @@ class _SdPageState extends State<SdPage> {
                       },
                     ),
                   ],
-                )
+                ),
               ],
             ),
             const SizedBox(height: 4),
@@ -208,10 +213,7 @@ class _SdPageState extends State<SdPage> {
               const SizedBox(height: 25),
               Text(
                 "Welcome ${widget.email}",
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.black87,
-                ),
+                style: const TextStyle(fontSize: 18, color: Colors.black87),
               ),
               const SizedBox(height: 8),
               const Text(
@@ -229,8 +231,10 @@ class _SdPageState extends State<SdPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromARGB(255, 10, 144, 131),
                   foregroundColor: Colors.white,
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 12,
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -240,9 +244,7 @@ class _SdPageState extends State<SdPage> {
               const SizedBox(height: 20),
               Expanded(
                 child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.transparent,
-                  ),
+                  decoration: const BoxDecoration(color: Colors.transparent),
                   child: ListView.builder(
                     itemCount: vaccines.length,
                     itemBuilder: (context, index) {
